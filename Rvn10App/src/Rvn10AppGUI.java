@@ -1,6 +1,5 @@
 import java.math.BigDecimal;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 public class Rvn10AppGUI extends JFrame implements ActionListener {
     // Datos del procesador #1
@@ -82,7 +81,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         menuBar.add(menuArchivo);
 
         mItemSalir = new JMenuItem("Salir");
-        //mItemSalir.addActionListener(this);
+        mItemSalir.addActionListener(this);
         menuArchivo.add(mItemSalir);
 
         menuMantenimiento=new JMenu("Mantenimiento");
@@ -133,18 +132,31 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         // Manejar los eventos aquí
         if (e.getSource() == mItemAcercaDe) {
             JOptionPane.showMessageDialog(
-                    this,
-                    "Rvn10 Store\n\n"
-                            + "Versión: 1.0\n"
-                            + "Equipo de desarrollo:\n"
-                            + "- Christian Rivero Valencia\n"
-                            + "- Sergio Cabrera Cueva\n\n"
-                            + "Teléfono: (+51) 999-999-999\n"
-                            + "Correo: ch.riverovalencia@gmail.com\n"
-                            + "© 2026 RVN10 Store",
-                    "Acerca de",
-                    JOptionPane.INFORMATION_MESSAGE
+                this,
+                "Rvn10 Store\n\n"
+                + "Versión: 1.0\n"
+                + "Equipo de desarrollo:\n"
+                + "- Christian Rivero Valencia\n"
+                + "- Sergio Cabrera Cueva\n\n"
+                + "Teléfono: (+51) 999-999-999\n"
+                + "Correo: ch.riverovalencia@gmail.com\n"
+                + "© 2026 RVN10 Store",
+                "Acerca de",
+                JOptionPane.INFORMATION_MESSAGE
             );
         }
+
+        if (e.getSource() == mItemSalir) {
+            int respuesta =JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que deseas salir?",
+                "Confirmar salida",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+            );
+            if (respuesta == JOptionPane.YES_OPTION)
+                dispose();
+        }
+
     }
 }
