@@ -1,6 +1,8 @@
 import java.math.BigDecimal;
 import javax.swing.*;
-public class Rvn10AppGUI extends JFrame {
+import java.awt.*;
+import java.awt.event.*;
+public class Rvn10AppGUI extends JFrame implements ActionListener {
     // Datos del procesador #1
     public static String id1 = "proc-001";
     public static String modelo1 = "Core i5-12400F";
@@ -57,17 +59,18 @@ public class Rvn10AppGUI extends JFrame {
     public static int anioFabricacion7 = 2022;
     public static boolean tieneGarantia7 = false;
 
+    // Elementos de la GUI
+    JMenuBar menuBar;
+    JMenu menuArchivo, menuMantenimiento, menuVentas, menuConfiguracion, menuAyuda;
+    JMenuItem miArchivo, miMantenimiento, miVentas, miConfiguracion, miAyuda;
+    JMenuItem mItemSalir, mItemConsultarCPU, mItemModificarCPU, mItemListarCPU, mItemVender, mItemConfigurarDescuentos, mItemConfigurarObsequios, mItemAcercaDe;
+
     static void main() {
         Rvn10AppGUI frame1 = new Rvn10AppGUI();
         frame1.setVisible(true);
     }
 
     public Rvn10AppGUI() {
-        JMenuBar menuBar;
-        JMenu menuArchivo, menuMantenimiento, menuVentas, menuConfiguracion, menuAyuda;;
-        //JMenuItem menuArchivo,menuMantenimiento,menuVentas, menuConfiguracion, miAyuda;
-        JMenuItem mItemSalir, mItemConsultarCPU, mItemModificarCPU, mItemListarCPU, mItemVender, mItemConfigurarDescuentos, mItemConfigurarObsequios, mItemAcercaDe;
-
         setTitle("Rvn10 Store 1.0");
         setBounds(550, 200, 813, 623);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,13 +118,33 @@ public class Rvn10AppGUI extends JFrame {
         //mItemSalir.addActionListener(this);
         menuConfiguracion.add(mItemConfigurarObsequios);
 
-        menuAyuda=new JMenu("Ayuda");
+        menuAyuda = new JMenu("Ayuda");
         menuBar.add(menuAyuda);
 
-        mItemAcercaDe = new JMenuItem("Acerca de Rvn10 Store");
-        //mItemSalir.addActionListener(this);
+        mItemAcercaDe = new JMenuItem("Acerca de");
+        mItemAcercaDe.addActionListener(this);
         menuAyuda.add(mItemAcercaDe);
 
         getContentPane().setLayout(null);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Manejar los eventos aquí
+        if (e.getSource() == mItemAcercaDe) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Rvn10 Store\n\n"
+                            + "Versión: 1.0\n"
+                            + "Equipo de desarrollo:\n"
+                            + "- Christian Rivero Valencia\n"
+                            + "- Sergio Cabrera Cueva\n\n"
+                            + "Teléfono: (+51) 999-999-999\n"
+                            + "Correo: ch.riverovalencia@gmail.com\n"
+                            + "© 2026 RVN10 Store",
+                    "Acerca de",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }
     }
 }
