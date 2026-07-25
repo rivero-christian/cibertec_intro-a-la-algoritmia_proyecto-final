@@ -2,6 +2,9 @@ import java.math.BigDecimal;
 import javax.swing.*;
 import java.awt.event.*;
 public class Rvn10AppGUI extends JFrame implements ActionListener {
+    // Constantes:
+    private static final String TITULO = "Rvn10 Store 1.0";
+
     // Datos del procesador #1
     public static String id1 = "proc-001";
     public static String modelo1 = "Core i5-12400F";
@@ -70,7 +73,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     }
 
     public Rvn10AppGUI() {
-        setTitle("Rvn10 Store 1.0");
+        setTitle(TITULO);
         setBounds(550, 200, 813, 623);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -131,19 +134,29 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Manejar los eventos aquí
         if (e.getSource() == mItemAcercaDe) {
+            String mensaje = """
+            Rvn10 Store
+            
+            Versión: 1.0
+
+            Equipo de desarrollo:
+            - Christian Rivero Valencia
+            - Sergio Cabrera Cueva
+
+            Teléfono: (+51) 999-999-999
+            Correo: soporte@rvn10.com
+
+            © 2026 RVN10 Store
+            """;
+
             JOptionPane.showMessageDialog(
                 this,
-                "Rvn10 Store\n\n"
-                + "Versión: 1.0\n"
-                + "Equipo de desarrollo:\n"
-                + "- Christian Rivero Valencia\n"
-                + "- Sergio Cabrera Cueva\n\n"
-                + "Teléfono: (+51) 999-999-999\n"
-                + "Correo: ch.riverovalencia@gmail.com\n"
-                + "© 2026 RVN10 Store",
+                mensaje,
                 "Acerca de",
                 JOptionPane.INFORMATION_MESSAGE
             );
+
+            
         }
 
         if (e.getSource() == mItemSalir) {
