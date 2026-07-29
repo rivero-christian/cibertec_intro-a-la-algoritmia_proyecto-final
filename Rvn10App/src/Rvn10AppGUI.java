@@ -61,11 +61,23 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public static int anioFabricacion7 = 2022;
     public static boolean tieneGarantia7 = false;
 
+    // Porcentajes de descuento
+    public static double porcentaje1 = 5.0;
+    public static double porcentaje2 = 7.5;
+    public static double porcentaje3 = 10.0;
+    public static double porcentaje4 = 12.5;
+
+    // Obsequios
+    public static String obsequio1 = "Mousepad";
+    public static String obsequio2 = "Mouse + Teclado";
+    public static String obsequio3 = "Audifonos";
+
     // Elementos de la GUI
     JMenuBar menuBar;
     JMenu menuArchivo, menuMantenimiento, menuVentas, menuConfiguracion, menuAyuda;
     JMenuItem miArchivo, miMantenimiento, miVentas, miConfiguracion, miAyuda;
-    JMenuItem mItemSalir, mItemConsultarCPU, mItemModificarCPU, mItemListarCPU, mItemVender, mItemConfigurarDescuentos, mItemConfigurarObsequios, mItemAcercaDe;
+    JMenuItem mItemSalir, mItemConsultarCPU, mItemModificarCPU, mItemListarCPU, mItemVender,
+            mItemConfigurarDescuentos, mItemConfigurarObsequios, mItemAcercaDe;
 
     static void main() {
         Rvn10AppGUI frame1 = new Rvn10AppGUI();
@@ -91,33 +103,33 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         menuBar.add(menuMantenimiento);
 
         mItemConsultarCPU = new JMenuItem("Consultar CPU");
-        //mItemSalir.addActionListener(this);
+        mItemConsultarCPU.addActionListener(this);
         menuMantenimiento.add(mItemConsultarCPU);
 
         mItemModificarCPU = new JMenuItem("Modificar CPU");
-        //mItemSalir.addActionListener(this);
+        mItemModificarCPU.addActionListener(this);
         menuMantenimiento.add(mItemModificarCPU);
 
         mItemListarCPU = new JMenuItem("Listar CPUs");
-        //mItemSalir.addActionListener(this);
+        mItemListarCPU.addActionListener(this);
         menuMantenimiento.add(mItemListarCPU);
 
         menuVentas=new JMenu("Ventas");
         menuBar.add(menuVentas);
 
         mItemVender = new JMenuItem("Vender");
-        //mItemSalir.addActionListener(this);
+        mItemVender.addActionListener(this);
         menuVentas.add(mItemVender);
 
         menuConfiguracion=new JMenu("Configuración");
         menuBar.add(menuConfiguracion);
 
         mItemConfigurarDescuentos = new JMenuItem("Configurar descuentos");
-        //mItemSalir.addActionListener(this);
+        mItemConfigurarDescuentos.addActionListener(this);
         menuConfiguracion.add(mItemConfigurarDescuentos);
 
         mItemConfigurarObsequios = new JMenuItem("Configurar obsequios");
-        //mItemSalir.addActionListener(this);
+        mItemConfigurarObsequios.addActionListener(this);
         menuConfiguracion.add(mItemConfigurarObsequios);
 
         menuAyuda = new JMenu("Ayuda");
@@ -132,7 +144,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Manejar los eventos aquí
         if (e.getSource() == mItemAcercaDe) {
             String mensaje = """
             Rvn10 Store
@@ -140,13 +151,13 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             Versión: 1.0
 
             Equipo de desarrollo:
-            - Christian Rivero Valencia
-            - Sergio Cabrera Cueva
+            - Mg. Christian Rivero Valencia
+            - Ing. Sergio Cabrera Cueva
 
             Teléfono: (+51) 999-999-999
-            Correo: soporte@rvn10.com
+            E-mail: support@rvn10.com
 
-            © 2026 RVN10 Store
+            © 2026 Rvn10 Store
             """;
 
             JOptionPane.showMessageDialog(
@@ -155,8 +166,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                 "Acerca de",
                 JOptionPane.INFORMATION_MESSAGE
             );
-
-            
         }
 
         if (e.getSource() == mItemSalir) {
@@ -167,9 +176,95 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE
             );
-            if (respuesta == JOptionPane.YES_OPTION)
+            if(respuesta == JOptionPane.YES_OPTION)
                 dispose();
         }
 
+        if (e.getSource() == mItemConsultarCPU) {
+            JDialog dialogo1 = new JDialog(this);
+            dialogo1.setBounds(200,200,500,500);
+            dialogo1.setVisible(true);
+            dialogo1.setTitle("Consultar CPU");
+
+            JLabel modeloLbl = new JLabel("Modelo");
+            modeloLbl.setBounds(100,75,50,50);
+            dialogo1.add(modeloLbl);
+
+
+        }
+
+        if (e.getSource() == mItemModificarCPU) {
+            System.out.println("456");
+        }
+
+        if (e.getSource() == mItemListarCPU) {
+            JDialog dialogo3 = new JDialog(this);
+            //dialogo3.setBounds( ,200,500,500);
+            dialogo3.setSize(400, 400);
+            dialogo3.setLocationRelativeTo(this);
+            dialogo3.setVisible(true);
+            dialogo3.setTitle("Listado de CPUs");
+
+            JTextArea txtArea = new JTextArea();
+            txtArea.setBounds(100,100, 200,200);
+            dialogo3.add(txtArea);
+            txtArea.append("LISTADO DE CPUS\n\n");
+
+            txtArea.append("ID:         : "+id1+"\n");
+            txtArea.append("Modelo      : "+modelo1+"\n");
+            txtArea.append("Fabricante  : "+fabricante1+"\n");
+            txtArea.append("Precio      : "+precio1+"\n");
+            txtArea.append("Fabricación : "+anioFabricacion1+"\n");
+            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia1)+"\n\n");
+
+            txtArea.append("ID:         : "+id2+"\n");
+            txtArea.append("Modelo      : "+modelo2+"\n");
+            txtArea.append("Fabricante  : "+fabricante2+"\n");
+            txtArea.append("Precio      : "+precio2+"\n");
+            txtArea.append("Fabricación : "+anioFabricacion2+"\n");
+            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia2)+"\n\n");
+
+            txtArea.append("ID:         : "+id3+"\n");
+            txtArea.append("Modelo      : "+modelo3+"\n");
+            txtArea.append("Fabricante  : "+fabricante3+"\n");
+            txtArea.append("Precio      : "+precio3+"\n");
+            txtArea.append("Fabricación : "+anioFabricacion3+"\n");
+            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia3)+"\n\n");
+
+            txtArea.append("ID:         : "+id4+"\n");
+            txtArea.append("Modelo      : "+modelo4+"\n");
+            txtArea.append("Fabricante  : "+fabricante4+"\n");
+            txtArea.append("Precio      : "+precio4+"\n");
+            txtArea.append("Fabricación : "+anioFabricacion4+"\n");
+            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia4)+"\n\n");
+
+            txtArea.append("ID:         : "+id5+"\n");
+            txtArea.append("Modelo      : "+modelo5+"\n");
+            txtArea.append("Fabricante  : "+fabricante5+"\n");
+            txtArea.append("Precio      : "+precio5+"\n");
+            txtArea.append("Fabricación : "+anioFabricacion5+"\n");
+            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia5)+"\n\n");
+
+            txtArea.append("ID:         : "+id6+"\n");
+            txtArea.append("Modelo      : "+modelo6+"\n");
+            txtArea.append("Fabricante  : "+fabricante6+"\n");
+            txtArea.append("Precio      : "+precio6+"\n");
+            txtArea.append("Fabricación : "+anioFabricacion6+"\n");
+            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia6)+"\n\n");
+
+            txtArea.append("ID:         : "+id7+"\n");
+            txtArea.append("Modelo      : "+modelo7+"\n");
+            txtArea.append("Fabricante  : "+fabricante7+"\n");
+            txtArea.append("Precio      : "+precio7+"\n");
+            txtArea.append("Fabricación : "+anioFabricacion7+"\n");
+            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia7)+"\n\n");
+        }
+    }
+
+    public static String responderBooleano(boolean garantia) {
+        if (garantia)
+            return "Sí";
+        else
+            return "No";
     }
 }
