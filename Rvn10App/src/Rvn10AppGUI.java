@@ -77,7 +77,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     JMenuBar menuBar;
     JMenu menuArchivo, menuMantenimiento, menuVentas, menuConfiguracion, menuAyuda;
     JMenuItem miArchivo, miMantenimiento, miVentas, miConfiguracion, miAyuda;
-    JMenuItem mItemSalir, mItemConsultarCPU, mItemModificarCPU, mItemListarCPU, mItemVender,
+    JMenuItem mItemSalir, mItemConsultar, mItemModificar, mItemListar, mItemVender,
             mItemConfigurarDescuentos, mItemConfigurarObsequios, mItemAcercaDe;
 
     static void main() {
@@ -103,17 +103,17 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         menuMantenimiento=new JMenu("Mantenimiento");
         menuBar.add(menuMantenimiento);
 
-        mItemConsultarCPU = new JMenuItem("Consultar CPU");
-        mItemConsultarCPU.addActionListener(this);
-        menuMantenimiento.add(mItemConsultarCPU);
+        mItemConsultar = new JMenuItem("Consultar CPU");
+        mItemConsultar.addActionListener(this);
+        menuMantenimiento.add(mItemConsultar);
 
-        mItemModificarCPU = new JMenuItem("Modificar CPU");
-        mItemModificarCPU.addActionListener(this);
-        menuMantenimiento.add(mItemModificarCPU);
+        mItemModificar = new JMenuItem("Modificar CPU");
+        mItemModificar.addActionListener(this);
+        menuMantenimiento.add(mItemModificar);
 
-        mItemListarCPU = new JMenuItem("Listar CPUs");
-        mItemListarCPU.addActionListener(this);
-        menuMantenimiento.add(mItemListarCPU);
+        mItemListar = new JMenuItem("Listar CPUs");
+        mItemListar.addActionListener(this);
+        menuMantenimiento.add(mItemListar);
 
         menuVentas=new JMenu("Ventas");
         menuBar.add(menuVentas);
@@ -181,24 +181,156 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                 dispose();
         }
 
-        if (e.getSource() == mItemConsultarCPU) {
-            JDialog dialogo1 = new JDialog(this);
-            dialogo1.setBounds(200,200,500,500);
+        if (e.getSource() == mItemConsultar) {
+            JDialog dialogo1 = new JDialog(this, "Consultar CPU");
+
+            dialogo1.setLayout(null);
+            dialogo1.setResizable(false);
+            dialogo1.setSize(450, 230);
+            dialogo1.setLocationRelativeTo(this);
+            dialogo1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            JLabel lblModelo = new JLabel("Modelo");
+            lblModelo.setBounds(20,10,80,20);
+            lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo1.add(lblModelo);
+
+            JComboBox<String> cboModelo = new JComboBox<>();
+            cboModelo.addItem(modelo1);
+            cboModelo.addItem(modelo2);
+            cboModelo.addItem(modelo3);
+            cboModelo.addItem(modelo4);
+            cboModelo.addItem(modelo5);
+            cboModelo.addItem(modelo6);
+            cboModelo.addItem(modelo7);
+            cboModelo.setBounds(150, 10, 150, 20);
+
+            dialogo1.add(cboModelo);
+
+            JLabel lblId = new JLabel("ID");
+            lblId.setBounds(20,40,80,20);
+            lblId.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo1.add(lblId);
+
+            JTextField txtId = new JTextField(id1);
+            txtId.setBounds(150,40,150,20);
+            txtId.setEditable(false);
+            dialogo1.add(txtId);
+
+            JLabel lblFabricante = new JLabel("Fabricante");
+            lblFabricante.setBounds(20,70,80,20);
+            lblFabricante.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo1.add(lblFabricante);
+
+            JTextField txtFabricante = new JTextField(fabricante1);
+            txtFabricante.setBounds(150,70,150,20);
+            txtFabricante.setEditable(false);
+            dialogo1.add(txtFabricante);
+
+            JLabel lblPrecio = new JLabel("Precio (S/.)");
+            lblPrecio.setBounds(20,100,80,20);
+            lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo1.add(lblPrecio);
+
+            JTextField txtPrecio = new JTextField(precio1.toString());
+            txtPrecio.setBounds(150,100,150,20);
+            txtPrecio.setEditable(false);
+            dialogo1.add(txtPrecio);
+
+            JLabel lblAnio = new JLabel("Año");
+            lblAnio.setBounds(20,130,80,20);
+            lblAnio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo1.add(lblAnio);
+
+            JTextField txtAnio = new JTextField(String.valueOf(anioFabricacion1));
+            txtAnio.setEditable(false);
+            txtAnio.setBounds(150,130,150,20);
+            dialogo1.add(txtAnio);
+
+            JLabel lblGarantia = new JLabel("Garantía");
+            lblGarantia.setBounds(20,160,80,20);
+            lblGarantia.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo1.add(lblGarantia);
+
+            JTextField txtGarantia = new JTextField(responderBooleano(tieneGarantia1));
+            txtGarantia.setEditable(false);
+            txtGarantia.setBounds(150,160,150,20);
+            dialogo1.add(txtGarantia);
+
+            JButton btnCerrar = new JButton("Cerrar");
+            btnCerrar.setBounds(350,10,80,20);
+            btnCerrar.addActionListener(evt -> dialogo1.dispose());
+
+            dialogo1.add(btnCerrar);
+
+            cboModelo.addActionListener(event -> {
+                switch (cboModelo.getSelectedIndex()) {
+                    case 0:
+                        txtId.setText(id1);
+                        txtFabricante.setText(fabricante1);
+                        txtPrecio.setText(precio1.toString());
+                        txtAnio.setText(String.valueOf(anioFabricacion1));
+                        txtGarantia.setText(responderBooleano(tieneGarantia1));
+                        break;
+
+                    case 1:
+                        txtId.setText(id2);
+                        txtFabricante.setText(fabricante2);
+                        txtPrecio.setText(precio2.toString());
+                        txtAnio.setText(String.valueOf(anioFabricacion2));
+                        txtGarantia.setText(responderBooleano(tieneGarantia2));
+                        break;
+
+                    case 2:
+                        txtId.setText(id3);
+                        txtFabricante.setText(fabricante3);
+                        txtPrecio.setText(precio3.toString());
+                        txtAnio.setText(String.valueOf(anioFabricacion3));
+                        txtGarantia.setText(responderBooleano(tieneGarantia3));
+                        break;
+
+                    case 3:
+                        txtId.setText(id4);
+                        txtFabricante.setText(fabricante4);
+                        txtPrecio.setText(precio4.toString());
+                        txtAnio.setText(String.valueOf(anioFabricacion4));
+                        txtGarantia.setText(responderBooleano(tieneGarantia4));
+                        break;
+
+                    case 4:
+                        txtId.setText(id5);
+                        txtFabricante.setText(fabricante5);
+                        txtPrecio.setText(precio5.toString());
+                        txtAnio.setText(String.valueOf(anioFabricacion5));
+                        txtGarantia.setText(responderBooleano(tieneGarantia5));
+                        break;
+
+                    case 5:
+                        txtId.setText(id6);
+                        txtFabricante.setText(fabricante6);
+                        txtPrecio.setText(precio6.toString());
+                        txtAnio.setText(String.valueOf(anioFabricacion6));
+                        txtGarantia.setText(responderBooleano(tieneGarantia6));
+                        break;
+
+                    case 6:
+                        txtId.setText(id7);
+                        txtFabricante.setText(fabricante7);
+                        txtPrecio.setText(precio7.toString());
+                        txtAnio.setText(String.valueOf(anioFabricacion7));
+                        txtGarantia.setText(responderBooleano(tieneGarantia7));
+                        break;
+                }
+            });
+
             dialogo1.setVisible(true);
-            dialogo1.setTitle("Consultar CPU");
-
-            JLabel modeloLbl = new JLabel("Modelo");
-            modeloLbl.setBounds(100,75,50,50);
-            dialogo1.add(modeloLbl);
-
-
         }
 
-        if (e.getSource() == mItemModificarCPU) {
+        if (e.getSource() == mItemModificar) {
             System.out.println("456");
         }
 
-        if (e.getSource() == mItemListarCPU) {
+        if (e.getSource() == mItemListar) {
             JDialog dialogo3 = new JDialog(this, "Listado de CPUs");
             dialogo3.setResizable(false);
 
