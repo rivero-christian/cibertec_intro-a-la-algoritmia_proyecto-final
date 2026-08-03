@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 public class Rvn10AppGUI extends JFrame implements ActionListener {
     // Constantes:
@@ -198,73 +199,49 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == mItemListarCPU) {
-            JDialog dialogo3 = new JDialog(this);
-            //dialogo3.setBounds( ,200,500,500);
-            dialogo3.setSize(400, 400);
-            dialogo3.setLocationRelativeTo(this);
-            dialogo3.setVisible(true);
-            dialogo3.setTitle("Listado de CPUs");
+            JDialog dialogo3 = new JDialog(this, "Listado de CPUs");
+            dialogo3.setResizable(false);
 
             JTextArea txtArea = new JTextArea();
-            txtArea.setBounds(100,100, 200,200);
-            dialogo3.add(txtArea);
-            txtArea.append("LISTADO DE CPUS\n\n");
+            txtArea.setEditable(false);
+            txtArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
-            txtArea.append("ID:         : "+id1+"\n");
-            txtArea.append("Modelo      : "+modelo1+"\n");
-            txtArea.append("Fabricante  : "+fabricante1+"\n");
-            txtArea.append("Precio      : "+precio1+"\n");
-            txtArea.append("Fabricación : "+anioFabricacion1+"\n");
-            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia1)+"\n\n");
+            JScrollPane scroll = new JScrollPane(txtArea);
 
-            txtArea.append("ID:         : "+id2+"\n");
-            txtArea.append("Modelo      : "+modelo2+"\n");
-            txtArea.append("Fabricante  : "+fabricante2+"\n");
-            txtArea.append("Precio      : "+precio2+"\n");
-            txtArea.append("Fabricación : "+anioFabricacion2+"\n");
-            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia2)+"\n\n");
+            dialogo3.add(scroll);
 
-            txtArea.append("ID:         : "+id3+"\n");
-            txtArea.append("Modelo      : "+modelo3+"\n");
-            txtArea.append("Fabricante  : "+fabricante3+"\n");
-            txtArea.append("Precio      : "+precio3+"\n");
-            txtArea.append("Fabricación : "+anioFabricacion3+"\n");
-            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia3)+"\n\n");
+            txtArea.append("""
+            =======================================================================
+                                          LISTADO DE CPUs
+            =======================================================================
+            """);
 
-            txtArea.append("ID:         : "+id4+"\n");
-            txtArea.append("Modelo      : "+modelo4+"\n");
-            txtArea.append("Fabricante  : "+fabricante4+"\n");
-            txtArea.append("Precio      : "+precio4+"\n");
-            txtArea.append("Fabricación : "+anioFabricacion4+"\n");
-            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia4)+"\n\n");
+            mostrarCPU(txtArea, id1, modelo1, fabricante1, precio1, anioFabricacion1, tieneGarantia1);
+            mostrarCPU(txtArea, id2, modelo2, fabricante2, precio2, anioFabricacion2, tieneGarantia2);
+            mostrarCPU(txtArea, id3, modelo3, fabricante3, precio3, anioFabricacion3, tieneGarantia3);
+            mostrarCPU(txtArea, id4, modelo4, fabricante4, precio4, anioFabricacion4, tieneGarantia4);
+            mostrarCPU(txtArea, id5, modelo5, fabricante5, precio5, anioFabricacion5, tieneGarantia5);
+            mostrarCPU(txtArea, id6, modelo6, fabricante6, precio6, anioFabricacion6, tieneGarantia6);
+            mostrarCPU(txtArea, id7, modelo7, fabricante7, precio7, anioFabricacion7, tieneGarantia7);
 
-            txtArea.append("ID:         : "+id5+"\n");
-            txtArea.append("Modelo      : "+modelo5+"\n");
-            txtArea.append("Fabricante  : "+fabricante5+"\n");
-            txtArea.append("Precio      : "+precio5+"\n");
-            txtArea.append("Fabricación : "+anioFabricacion5+"\n");
-            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia5)+"\n\n");
-
-            txtArea.append("ID:         : "+id6+"\n");
-            txtArea.append("Modelo      : "+modelo6+"\n");
-            txtArea.append("Fabricante  : "+fabricante6+"\n");
-            txtArea.append("Precio      : "+precio6+"\n");
-            txtArea.append("Fabricación : "+anioFabricacion6+"\n");
-            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia6)+"\n\n");
-
-            txtArea.append("ID:         : "+id7+"\n");
-            txtArea.append("Modelo      : "+modelo7+"\n");
-            txtArea.append("Fabricante  : "+fabricante7+"\n");
-            txtArea.append("Precio      : "+precio7+"\n");
-            txtArea.append("Fabricación : "+anioFabricacion7+"\n");
-            txtArea.append("Garantía    : "+responderBooleano(tieneGarantia7)+"\n\n");
+            dialogo3.setSize(520, 450);
+            dialogo3.setLocationRelativeTo(this);
+            dialogo3.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            txtArea.setCaretPosition(0);
+            dialogo3.setVisible(true);
         }
     }
 
     public static String responderBooleano(boolean garantia) {
-        if (garantia)
-            return "Sí";
-        else
-            return "No";
+        return garantia ? "Sí" : "No";
+    }
+
+    public void mostrarCPU(JTextArea txtArea, String id, String modelo, String fabricante, BigDecimal precio, int anioFabricacion, boolean tieneGarantia) {
+        txtArea.append("\n\nID           : " + id + "\n");
+        txtArea.append("Modelo       : " + modelo + "\n");
+        txtArea.append("Fabricante   : " + fabricante + "\n");
+        txtArea.append("Precio       : S/ " + precio + "\n");
+        txtArea.append("Fabricación  : " + anioFabricacion + "\n");
+        txtArea.append("Garantía     : " + responderBooleano(tieneGarantia));
     }
 }
