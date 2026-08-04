@@ -6,19 +6,21 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     // Constantes:
     private static final String TITULO = "Rvn10 Store 1.0";
 
+    //VARIABLES GLOBALES:
+
     // Datos del procesador #1
     public static String id1 = "proc-001";
     public static String modelo1 = "Core i5-12400F";
     public static String fabricante1 = "Intel";
-    BigDecimal precio1 = new BigDecimal("620.00");
+    public static BigDecimal precio1 = new BigDecimal("620.00");
     public static int anioFabricacion1 = 2022;
-    public static boolean tieneGarantia1 = false;
+    public static boolean tieneGarantia1 = true;
 
     // Datos del procesador #2
     public static String id2 = "proc-002";
     public static String modelo2 = "Ryzen 5 5600X";
     public static String fabricante2 = "AMD";
-    BigDecimal precio2 = new BigDecimal("552.50");
+    public static BigDecimal precio2 = new BigDecimal("552.50");
     public static int anioFabricacion2 = 2020;
     public static boolean tieneGarantia2 = false;
 
@@ -26,7 +28,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public static String id3 = "proc-003";
     public static String modelo3 = "Core i9-14900K";
     public static String fabricante3 = "Intel";
-    BigDecimal precio3 = new BigDecimal("2198.16");
+    public static BigDecimal precio3 = new BigDecimal("2198.16");
     public static int anioFabricacion3 = 2023;
     public static boolean tieneGarantia3 = false;
 
@@ -34,7 +36,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public static String id4 = "proc-004";
     public static String modelo4 = "Ryzen 7 7800X3D";
     public static String fabricante4 = "AMD";
-    BigDecimal precio4 = new BigDecimal("1750.00");
+    public static BigDecimal precio4 = new BigDecimal("1750.00");
     public static int anioFabricacion4 = 2023;
     public static boolean tieneGarantia4 = false;
 
@@ -42,7 +44,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public static String id5 = "proc-005";
     public static String modelo5 = "Ryzen 5 8600G";
     public static String fabricante5 = "AMD";
-    BigDecimal precio5 = new BigDecimal("749.00");
+    public static BigDecimal precio5 = new BigDecimal("749.00");
     public static int anioFabricacion5 = 2024;
     public static boolean tieneGarantia5 = false;
 
@@ -50,7 +52,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public static String id6 = "proc-006";
     public static String modelo6 = "Core Ultra 7 265K";
     public static String fabricante6 = "Intel";
-    BigDecimal precio6 = new BigDecimal("1680.50");
+    public static BigDecimal precio6 = new BigDecimal("1680.50");
     public static int anioFabricacion6 = 2024;
     public static boolean tieneGarantia6 = false;
 
@@ -58,7 +60,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public static String id7 = "proc-007";
     public static String modelo7 = "Core i3-12100F";
     public static String fabricante7 = "Intel";
-    BigDecimal precio7 = new BigDecimal("395.50");
+    public static BigDecimal precio7 = new BigDecimal("395.50");
     public static int anioFabricacion7 = 2022;
     public static boolean tieneGarantia7 = false;
 
@@ -71,12 +73,11 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     // Obsequios
     public static String obsequio1 = "Mousepad";
     public static String obsequio2 = "Mouse + Teclado";
-    public static String obsequio3 = "Audifonos";
+    public static String obsequio3 = "Audífonos";
 
     // Elementos de la GUI
     JMenuBar menuBar;
     JMenu menuArchivo, menuMantenimiento, menuVentas, menuConfiguracion, menuAyuda;
-    JMenuItem miArchivo, miMantenimiento, miVentas, miConfiguracion, miAyuda;
     JMenuItem mItemSalir, mItemConsultar, mItemModificar, mItemListar, mItemVender,
             mItemConfigurarDescuentos, mItemConfigurarObsequios, mItemAcercaDe;
 
@@ -136,7 +137,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         menuAyuda = new JMenu("Ayuda");
         menuBar.add(menuAyuda);
 
-        mItemAcercaDe = new JMenuItem("Acerca de");
+        mItemAcercaDe = new JMenuItem("Acerca de Tienda");
         mItemAcercaDe.addActionListener(this);
         menuAyuda.add(mItemAcercaDe);
 
@@ -252,13 +253,13 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             lblGarantia.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dialogo1.add(lblGarantia);
 
-            JTextField txtGarantia = new JTextField(responderBooleano(tieneGarantia1));
+            JTextField txtGarantia = new JTextField(convertirBooleanoATexto(tieneGarantia1));
             txtGarantia.setEditable(false);
             txtGarantia.setBounds(150,160,150,20);
             dialogo1.add(txtGarantia);
 
             JButton btnCerrar = new JButton("Cerrar");
-            btnCerrar.setBounds(350,10,80,20);
+            btnCerrar.setBounds(350,10,85,20);
             btnCerrar.addActionListener(evt -> dialogo1.dispose());
 
             dialogo1.add(btnCerrar);
@@ -270,7 +271,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         txtFabricante.setText(fabricante1);
                         txtPrecio.setText(precio1.toString());
                         txtAnio.setText(String.valueOf(anioFabricacion1));
-                        txtGarantia.setText(responderBooleano(tieneGarantia1));
+                        txtGarantia.setText(convertirBooleanoATexto(tieneGarantia1));
                         break;
 
                     case 1:
@@ -278,7 +279,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         txtFabricante.setText(fabricante2);
                         txtPrecio.setText(precio2.toString());
                         txtAnio.setText(String.valueOf(anioFabricacion2));
-                        txtGarantia.setText(responderBooleano(tieneGarantia2));
+                        txtGarantia.setText(convertirBooleanoATexto(tieneGarantia2));
                         break;
 
                     case 2:
@@ -286,7 +287,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         txtFabricante.setText(fabricante3);
                         txtPrecio.setText(precio3.toString());
                         txtAnio.setText(String.valueOf(anioFabricacion3));
-                        txtGarantia.setText(responderBooleano(tieneGarantia3));
+                        txtGarantia.setText(convertirBooleanoATexto(tieneGarantia3));
                         break;
 
                     case 3:
@@ -294,7 +295,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         txtFabricante.setText(fabricante4);
                         txtPrecio.setText(precio4.toString());
                         txtAnio.setText(String.valueOf(anioFabricacion4));
-                        txtGarantia.setText(responderBooleano(tieneGarantia4));
+                        txtGarantia.setText(convertirBooleanoATexto(tieneGarantia4));
                         break;
 
                     case 4:
@@ -302,7 +303,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         txtFabricante.setText(fabricante5);
                         txtPrecio.setText(precio5.toString());
                         txtAnio.setText(String.valueOf(anioFabricacion5));
-                        txtGarantia.setText(responderBooleano(tieneGarantia5));
+                        txtGarantia.setText(convertirBooleanoATexto(tieneGarantia5));
                         break;
 
                     case 5:
@@ -310,7 +311,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         txtFabricante.setText(fabricante6);
                         txtPrecio.setText(precio6.toString());
                         txtAnio.setText(String.valueOf(anioFabricacion6));
-                        txtGarantia.setText(responderBooleano(tieneGarantia6));
+                        txtGarantia.setText(convertirBooleanoATexto(tieneGarantia6));
                         break;
 
                     case 6:
@@ -318,7 +319,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         txtFabricante.setText(fabricante7);
                         txtPrecio.setText(precio7.toString());
                         txtAnio.setText(String.valueOf(anioFabricacion7));
-                        txtGarantia.setText(responderBooleano(tieneGarantia7));
+                        txtGarantia.setText(convertirBooleanoATexto(tieneGarantia7));
                         break;
                 }
             });
@@ -327,7 +328,149 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == mItemModificar) {
-            System.out.println("456");
+            JDialog dialogo2 = new JDialog(this, "Consultar CPU");
+
+            dialogo2.setLayout(null);
+            dialogo2.setResizable(false);
+            dialogo2.setSize(450, 230);
+            dialogo2.setLocationRelativeTo(this);
+            dialogo2.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            JLabel lblModelo = new JLabel("Modelo");
+            lblModelo.setBounds(20,10,80,20);
+            lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo2.add(lblModelo);
+
+            JComboBox<String> cboModelo = new JComboBox<>();
+            cboModelo.addItem(modelo1);
+            cboModelo.addItem(modelo2);
+            cboModelo.addItem(modelo3);
+            cboModelo.addItem(modelo4);
+            cboModelo.addItem(modelo5);
+            cboModelo.addItem(modelo6);
+            cboModelo.addItem(modelo7);
+            cboModelo.setBounds(150, 10, 150, 20);
+
+            dialogo2.add(cboModelo);
+
+            JLabel lblId = new JLabel("ID");
+            lblId.setBounds(20,40,80,20);
+            lblId.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo2.add(lblId);
+
+            JTextField txtId = new JTextField(id1);
+            txtId.setBounds(150,40,150,20);
+            dialogo2.add(txtId);
+
+            JLabel lblFabricante = new JLabel("Fabricante");
+            lblFabricante.setBounds(20,70,80,20);
+            lblFabricante.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo2.add(lblFabricante);
+
+            JTextField txtFabricante = new JTextField(fabricante1);
+            txtFabricante.setBounds(150,70,150,20);
+            dialogo2.add(txtFabricante);
+
+            JLabel lblPrecio = new JLabel("Precio (S/.)");
+            lblPrecio.setBounds(20,100,80,20);
+            lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo2.add(lblPrecio);
+
+            JTextField txtPrecio = new JTextField(precio1.toString());
+            txtPrecio.setBounds(150,100,150,20);
+            dialogo2.add(txtPrecio);
+
+            JLabel lblAnio = new JLabel("Año");
+            lblAnio.setBounds(20,130,80,20);
+            lblAnio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo2.add(lblAnio);
+
+            JTextField txtAnio = new JTextField(String.valueOf(anioFabricacion1));
+            txtAnio.setBounds(150,130,150,20);
+            dialogo2.add(txtAnio);
+
+            JLabel lblGarantia = new JLabel("Garantía");
+            lblGarantia.setBounds(20,160,80,20);
+            lblGarantia.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo2.add(lblGarantia);
+
+            JComboBox<String> cboGarantia = new JComboBox<>();
+            cboGarantia.addItem(convertirBooleanoATexto(tieneGarantia1));
+            cboGarantia.addItem(convertirBooleanoATexto(!tieneGarantia1));
+            cboGarantia.setBounds(150,160,150,20);
+            dialogo2.add(cboGarantia);
+
+            JButton btnCerrar = new JButton("Cerrar");
+            btnCerrar.setBounds(350,10,85,20);
+            btnCerrar.addActionListener(evt -> dialogo2.dispose());
+            dialogo2.add(btnCerrar);
+
+            JButton btnGuardar = new JButton("Guardar");
+            btnGuardar.setBounds(350,40,85,20);
+            //btnGuardar.addActionListener(evt -> dialogo2.dispose());
+            dialogo2.add(btnGuardar);
+
+//            cboModelo.addActionListener(event -> {
+//                switch (cboModelo.getSelectedIndex()) {
+//                    case 0:
+//                        txtId.setText(id1);
+//                        txtFabricante.setText(fabricante1);
+//                        txtPrecio.setText(precio1.toString());
+//                        txtAnio.setText(String.valueOf(anioFabricacion1));
+//                        txtGarantia.setText(responderBooleano(tieneGarantia1));
+//                        break;
+//
+//                    case 1:
+//                        txtId.setText(id2);
+//                        txtFabricante.setText(fabricante2);
+//                        txtPrecio.setText(precio2.toString());
+//                        txtAnio.setText(String.valueOf(anioFabricacion2));
+//                        txtGarantia.setText(responderBooleano(tieneGarantia2));
+//                        break;
+//
+//                    case 2:
+//                        txtId.setText(id3);
+//                        txtFabricante.setText(fabricante3);
+//                        txtPrecio.setText(precio3.toString());
+//                        txtAnio.setText(String.valueOf(anioFabricacion3));
+//                        txtGarantia.setText(responderBooleano(tieneGarantia3));
+//                        break;
+//
+//                    case 3:
+//                        txtId.setText(id4);
+//                        txtFabricante.setText(fabricante4);
+//                        txtPrecio.setText(precio4.toString());
+//                        txtAnio.setText(String.valueOf(anioFabricacion4));
+//                        txtGarantia.setText(responderBooleano(tieneGarantia4));
+//                        break;
+//
+//                    case 4:
+//                        txtId.setText(id5);
+//                        txtFabricante.setText(fabricante5);
+//                        txtPrecio.setText(precio5.toString());
+//                        txtAnio.setText(String.valueOf(anioFabricacion5));
+//                        txtGarantia.setText(responderBooleano(tieneGarantia5));
+//                        break;
+//
+//                    case 5:
+//                        txtId.setText(id6);
+//                        txtFabricante.setText(fabricante6);
+//                        txtPrecio.setText(precio6.toString());
+//                        txtAnio.setText(String.valueOf(anioFabricacion6));
+//                        txtGarantia.setText(responderBooleano(tieneGarantia6));
+//                        break;
+//
+//                    case 6:
+//                        txtId.setText(id7);
+//                        txtFabricante.setText(fabricante7);
+//                        txtPrecio.setText(precio7.toString());
+//                        txtAnio.setText(String.valueOf(anioFabricacion7));
+//                        txtGarantia.setText(responderBooleano(tieneGarantia7));
+//                        break;
+//                }
+//            });
+
+            dialogo2.setVisible(true);
         }
 
         if (e.getSource() == mItemListar) {
@@ -364,7 +507,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         }
     }
 
-    public static String responderBooleano(boolean garantia) {
+    public static String convertirBooleanoATexto(boolean garantia) {
         return garantia ? "Sí" : "No";
     }
 
@@ -374,6 +517,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         txtArea.append("Fabricante   : " + fabricante + "\n");
         txtArea.append("Precio       : S/ " + precio + "\n");
         txtArea.append("Fabricación  : " + anioFabricacion + "\n");
-        txtArea.append("Garantía     : " + responderBooleano(tieneGarantia));
+        txtArea.append("Garantía     : " + convertirBooleanoATexto(tieneGarantia));
     }
 }
