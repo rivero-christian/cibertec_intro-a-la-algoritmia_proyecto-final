@@ -72,10 +72,10 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public static int stock7 = 82;
 
     // Porcentajes de descuento
-    public static double porcentaje1 = 5.0;
-    public static double porcentaje2 = 7.5;
-    public static double porcentaje3 = 10.0;
-    public static double porcentaje4 = 12.5;
+    public static double porcentaje1 = 7.5;
+    public static double porcentaje2 = 10.0;
+    public static double porcentaje3 = 12.5;
+    public static double porcentaje4 = 15.0;
 
     // Obsequios
     public static String obsequio1 = "Mousepad";
@@ -523,6 +523,86 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             dialogo3.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             txtArea.setCaretPosition(0);
             dialogo3.setVisible(true);
+        }
+
+        if(e.getSource() == mItemConfigurarDescuentos) {
+            JDialog dialogo4 = new JDialog(this, "Configurar descuentos", true);
+
+            dialogo4.setResizable(false);
+            dialogo4.setLayout(null);
+            dialogo4.setResizable(false);
+            dialogo4.setSize(450, 280);
+            dialogo4.setLocationRelativeTo(this);
+            dialogo4.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            JLabel lblUnidades1 = new JLabel("1 a 5 unidades");
+            lblUnidades1.setBounds(20,10,150,20);
+            lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            //lblUnidades1.setBackground(Color );
+            dialogo4.add(lblUnidades1);
+
+            JTextField txtPorcentaje1 = new JTextField(String.valueOf(porcentaje1));;
+            txtPorcentaje1.setBounds(210, 10, 50, 20);
+            dialogo4.add(txtPorcentaje1);
+
+            JLabel lblPorcentaje1 = new JLabel("%");
+            lblPorcentaje1.setBounds(270,10,20,20);
+            lblPorcentaje1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo4.add(lblPorcentaje1);
+
+            JLabel lblUnidades2 = new JLabel("6 a 10 unidades");
+            lblUnidades2.setBounds(20,40,150,20);
+            lblUnidades2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo4.add(lblUnidades2);
+
+            JTextField txtPorcentaje2 = new JTextField(String.valueOf(porcentaje2));;
+            txtPorcentaje2.setBounds(210, 40, 50, 20);
+            dialogo4.add(txtPorcentaje2);
+
+            JLabel lblPorcentaje2 = new JLabel("%");
+            lblPorcentaje2.setBounds(270,40,20,20);
+            lblPorcentaje2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo4.add(lblPorcentaje2);
+
+            JLabel lblUnidades3 = new JLabel("11 a 15 unidades");
+            lblUnidades3.setBounds(20,70,150,20);
+            lblUnidades3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo4.add(lblUnidades3);
+
+            JTextField txtPorcentaje3 = new JTextField(String.valueOf(porcentaje3));
+            txtPorcentaje3.setBounds(210, 100, 50, 20);
+            dialogo4.add(txtPorcentaje3);
+
+            JLabel lblPorcentaje3 = new JLabel("%");
+            lblPorcentaje3.setBounds(270,100,20,20);
+            lblPorcentaje3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo4.add(lblPorcentaje3);
+
+            JLabel lblUnidades4 = new JLabel("Más de 15 unidades");
+            lblUnidades4.setBounds(20,100,150,20);
+            lblUnidades4.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo4.add(lblUnidades4);
+
+            JTextField txtPorcentaje4 = new JTextField(String.valueOf(porcentaje4));
+            txtPorcentaje4.setBounds(210, 70, 50, 20);
+            dialogo4.add(txtPorcentaje4);
+
+            JLabel lblPorcentaje4 = new JLabel("%");
+            lblPorcentaje4.setBounds(270,70,20,20);
+            lblPorcentaje4.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo4.add(lblPorcentaje4);
+
+            JButton btnAceptar = new JButton("Aceptar");
+            btnAceptar.setBounds(325, 10, 90, 20);
+            //btnAceptar.addActionListener(evt -> ...);
+            dialogo4.add(btnAceptar);
+
+            JButton btnCancelar = new JButton("Cancelar");
+            btnCancelar.setBounds(325, 40, 90, 20);
+            //btnCancelar.addActionListener(evt -> ...);
+            dialogo4.add(btnCancelar);
+
+            dialogo4.setVisible(true);
         }
 
         if(e.getSource() == mItemAcercaDe) {
