@@ -538,7 +538,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             JLabel lblUnidades1 = new JLabel("1 a 5 unidades");
             lblUnidades1.setBounds(20,10,150,20);
             lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            //lblUnidades1.setBackground(Color );
             dialogo4.add(lblUnidades1);
 
             JTextField txtPorcentaje1 = new JTextField(String.valueOf(porcentaje1));;
@@ -599,10 +598,60 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JButton btnCancelar = new JButton("Cancelar");
             btnCancelar.setBounds(325, 40, 90, 20);
-            //btnCancelar.addActionListener(evt -> ...);
+            btnCancelar.addActionListener(evt -> dialogo4.dispose());
             dialogo4.add(btnCancelar);
 
             dialogo4.setVisible(true);
+        }
+
+        if(e.getSource() == mItemConfigurarObsequios) {
+            JDialog dialogo5 = new JDialog(this, "Configurar obsequios", true);
+
+            dialogo5.setResizable(false);
+            dialogo5.setLayout(null);
+            dialogo5.setResizable(false);
+            dialogo5.setSize(450, 280);
+            dialogo5.setLocationRelativeTo(this);
+            dialogo5.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            JLabel lblUnidades1 = new JLabel("1 unidad");
+            lblUnidades1.setBounds(20,20,120,20);
+            lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo5.add(lblUnidades1);
+
+            JTextField txtObsequio1 = new JTextField(obsequio1);;
+            txtObsequio1.setBounds(180, 20, 125, 20);
+            dialogo5.add(txtObsequio1);
+
+            JLabel lblUnidades2 = new JLabel("2 a 5 unidades");
+            lblUnidades2.setBounds(20,50,120,20);
+            lblUnidades2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo5.add(lblUnidades2);
+
+            JTextField txtObsequio2 = new JTextField(obsequio2);;
+            txtObsequio2.setBounds(180, 50, 125, 20);
+            dialogo5.add(txtObsequio2);
+
+            JLabel lblUnidades3 = new JLabel("6 a más unidades");
+            lblUnidades3.setBounds(20,80,120,20);
+            lblUnidades3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dialogo5.add(lblUnidades3);
+
+            JTextField txtObsequio3 = new JTextField(obsequio3);;
+            txtObsequio3.setBounds(180, 80, 125, 20);
+            dialogo5.add(txtObsequio3);
+
+            JButton btnAceptar = new JButton("Aceptar");
+            btnAceptar.setBounds(325, 20, 90, 20);
+            //btnAceptar.addActionListener(evt -> ...);
+            dialogo5.add(btnAceptar);
+
+            JButton btnCancelar = new JButton("Cancelar");
+            btnCancelar.setBounds(325, 50, 90, 20);
+            btnCancelar.addActionListener(evt -> dialogo5.dispose());
+            dialogo5.add(btnCancelar);
+
+            dialogo5.setVisible(true);
         }
 
         if(e.getSource() == mItemAcercaDe) {
