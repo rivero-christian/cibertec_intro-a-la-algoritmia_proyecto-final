@@ -525,6 +525,96 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             dialogo3.setVisible(true);
         }
 
+        if(e.getSource() == mItemVender) {
+            JDialog dlgVender = new JDialog(this, "Vender", true);
+
+            dlgVender.setResizable(false);
+            dlgVender.setLayout(null);
+            dlgVender.setResizable(false);
+            dlgVender.setSize(600, 400);
+            dlgVender.setLocationRelativeTo(this);
+            dlgVender.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            JLabel lblModelo = new JLabel("Modelo");
+            lblModelo.setBounds(20,20,70,20);
+            lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dlgVender.add(lblModelo);
+
+            JComboBox<String> cboModelo = new JComboBox<>();
+            cboModelo.addItem(modelo1);
+            cboModelo.addItem(modelo2);
+            cboModelo.addItem(modelo3);
+            cboModelo.addItem(modelo4);
+            cboModelo.addItem(modelo5);
+            cboModelo.addItem(modelo6);
+            cboModelo.addItem(modelo7);
+            cboModelo.setBounds(120, 20, 150, 20);
+            dlgVender.add(cboModelo);
+
+            JLabel lblPrecio = new JLabel("Precio(S/.)");
+            lblPrecio.setBounds(20,50,70,20);
+            lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dlgVender.add(lblPrecio);
+
+            JTextField txtPrecio = new JTextField(String.valueOf(precio1));;
+            txtPrecio.setBounds(120, 50, 150, 20);
+            txtPrecio.setEditable(false);
+            dlgVender.add(txtPrecio);
+
+            JLabel lblCantidad = new JLabel("Cantidad");
+            lblCantidad.setBounds(20,80,70,20);
+            lblCantidad.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
+            dlgVender.add(lblCantidad);
+
+            JTextField txtCantidad = new JTextField();;
+            txtCantidad.setBounds(120, 80, 150, 20);
+            dlgVender.add(txtCantidad);
+
+            JButton btnVender = new JButton("Vender");
+            btnVender.setBounds(325, 20, 90, 20);
+            //btnVender.addActionListener(evt -> ...);
+            dlgVender.add(btnVender);
+
+            JButton btnCerrar = new JButton("Cerrar");
+            btnCerrar.setBounds(325, 50, 90, 20);
+            btnCerrar.addActionListener(evt -> dlgVender.dispose());
+            dlgVender.add(btnCerrar);
+
+            cboModelo.addActionListener(event -> {
+                switch (cboModelo.getSelectedIndex()) {
+                    case 0:
+                        txtPrecio.setText(precio1.toString());
+                        break;
+
+                    case 1:
+                        txtPrecio.setText(precio2.toString());
+                        break;
+
+                    case 2:
+                        txtPrecio.setText(precio3.toString());
+                        break;
+
+                    case 3:
+                        txtPrecio.setText(precio4.toString());
+                        break;
+
+                    case 4:
+                        txtPrecio.setText(precio5.toString());
+                        break;
+
+                    case 5:
+                        txtPrecio.setText(precio6.toString());
+                        break;
+
+                    case 6:
+                        txtPrecio.setText(precio7.toString());
+                        break;
+                }
+            });
+
+            dlgVender.setVisible(true);
+        }
+
         if(e.getSource() == mItemConfigurarDescuentos) {
             JDialog dialogo4 = new JDialog(this, "Configurar descuentos", true);
 
