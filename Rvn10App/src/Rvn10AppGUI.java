@@ -175,10 +175,20 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             dialogo1.setLocationRelativeTo(this);
             dialogo1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
+            JPanel panelPrincipal = new JPanel();
+            panelPrincipal.setLayout(null);
+            panelPrincipal.setBounds(10, 10, 420, 225);
+
+            panelPrincipal.setBorder(
+                BorderFactory.createEtchedBorder()
+            );
+
+            dialogo1.add(panelPrincipal);
+
             JLabel lblModelo = new JLabel("Modelo");
-            lblModelo.setBounds(20,10,80,20);
+            lblModelo.setBounds(20,10,100,20);
             lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo1.add(lblModelo);
+            panelPrincipal.add(lblModelo);
 
             JComboBox<String> cboModelo = new JComboBox<>();
             cboModelo.addItem(modelo1);
@@ -188,78 +198,80 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             cboModelo.addItem(modelo5);
             cboModelo.addItem(modelo6);
             cboModelo.addItem(modelo7);
-            cboModelo.setBounds(150, 10, 150, 20);
+            cboModelo.setBounds(140, 10, 170, 25);
 
-            dialogo1.add(cboModelo);
+            panelPrincipal.add(cboModelo);
 
             JLabel lblId = new JLabel("ID");
-            lblId.setBounds(20,40,80,20);
+            lblId.setBounds(20,40,100,20);
             lblId.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo1.add(lblId);
+            panelPrincipal.add(lblId);
 
             JTextField txtId = new JTextField(id1);
-            txtId.setBounds(150,40,150,20);
+            txtId.setBounds(140,40,170,25);
             txtId.setEditable(false);
-            dialogo1.add(txtId);
+            panelPrincipal.add(txtId);
 
             JLabel lblFabricante = new JLabel("Fabricante");
-            lblFabricante.setBounds(20,70,80,20);
+            lblFabricante.setBounds(20,70,100,20);
             lblFabricante.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo1.add(lblFabricante);
+            panelPrincipal.add(lblFabricante);
 
             JTextField txtFabricante = new JTextField(fabricante1);
-            txtFabricante.setBounds(150,70,150,20);
+            txtFabricante.setBounds(140,70,170,25);
             txtFabricante.setEditable(false);
-            dialogo1.add(txtFabricante);
+            panelPrincipal.add(txtFabricante);
 
             JLabel lblPrecio = new JLabel("Precio (S/.)");
-            lblPrecio.setBounds(20,100,80,20);
+            lblPrecio.setBounds(20,100,100,20);
             lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo1.add(lblPrecio);
+            panelPrincipal.add(lblPrecio);
 
             JTextField txtPrecio = new JTextField(precio1.toString());
-            txtPrecio.setBounds(150,100,150,20);
+            txtPrecio.setBounds(140,100,170,25);
             txtPrecio.setEditable(false);
-            dialogo1.add(txtPrecio);
+            panelPrincipal.add(txtPrecio);
 
             JLabel lblAnio = new JLabel("Año");
-            lblAnio.setBounds(20,130,80,20);
+            lblAnio.setBounds(20,130,100,20);
             lblAnio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo1.add(lblAnio);
+            panelPrincipal.add(lblAnio);
 
             JTextField txtAnio = new JTextField(String.valueOf(anioFabricacion1));
+            txtAnio.setBounds(140,130,170,25);
             txtAnio.setEditable(false);
-            txtAnio.setBounds(150,130,150,20);
-            dialogo1.add(txtAnio);
+            panelPrincipal.add(txtAnio);
 
             JLabel lblGarantia = new JLabel("Garantía");
-            lblGarantia.setBounds(20,160,80,20);
+            lblGarantia.setBounds(20,160,100,20);
             lblGarantia.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo1.add(lblGarantia);
+            panelPrincipal.add(lblGarantia);
 
             JTextField txtGarantia = new JTextField(convertirBooleanoATexto(tieneGarantia1));
             txtGarantia.setEditable(false);
-            txtGarantia.setBounds(150,160,150,20);
-            dialogo1.add(txtGarantia);
+            txtGarantia.setBounds(140,160,170,25);
+            panelPrincipal.add(txtGarantia);
 
             JLabel lblStock = new JLabel("Stock");
-            lblStock.setBounds(20, 190, 80, 20);
+            lblStock.setBounds(20, 190, 100, 20);
             lblStock.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo1.add(lblStock);
+            panelPrincipal.add(lblStock);
 
             JTextField txtStock = new JTextField(String.valueOf(stock1));
+            txtStock.setBounds(140,190,170,25);
             txtStock.setEditable(false);
-            txtStock.setBounds(150,190,150,20);
-            dialogo1.add(txtStock);
+            panelPrincipal.add(txtStock);
 
             JButton btnCerrar = new JButton("Cerrar");
-            btnCerrar.setBounds(350,10,85,20);
-            btnCerrar.addActionListener(evt -> dialogo1.dispose());
+            btnCerrar.setBounds(325,10,85,25);
+            btnCerrar.addActionListener(evt ->
+                dialogo1.dispose())
+            ;
 
-            dialogo1.add(btnCerrar);
+            panelPrincipal.add(btnCerrar);
 
             cboModelo.addActionListener(event -> {
-                switch (cboModelo.getSelectedIndex()) {
+                switch(cboModelo.getSelectedIndex()) {
                     case 0:
                         txtId.setText(id1);
                         txtFabricante.setText(fabricante1);
