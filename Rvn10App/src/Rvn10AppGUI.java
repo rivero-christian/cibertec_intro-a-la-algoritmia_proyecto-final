@@ -264,9 +264,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JButton btnCerrar = new JButton("Cerrar");
             btnCerrar.setBounds(325,10,85,25);
-            btnCerrar.addActionListener(evt ->
-                dialogo1.dispose())
-            ;
+            btnCerrar.addActionListener(evt -> dialogo1.dispose());
 
             panelPrincipal.add(btnCerrar);
 
@@ -568,7 +566,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgVender.add(lblPrecio);
 
-            JTextField txtPrecio = new JTextField(String.valueOf(precio1));;
+            JTextField txtPrecio = new JTextField(String.valueOf(precio1));
             txtPrecio.setBounds(120, 50, 150, 20);
             txtPrecio.setEditable(false);
             dlgVender.add(txtPrecio);
@@ -578,7 +576,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             lblCantidad.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgVender.add(lblCantidad);
 
-            JTextField txtCantidad = new JTextField();;
+            JTextField txtCantidad = new JTextField();
             txtCantidad.setBounds(120, 80, 150, 20);
             dlgVender.add(txtCantidad);
 
@@ -642,7 +640,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dialogo4.add(lblUnidades1);
 
-            JTextField txtPorcentaje1 = new JTextField(String.valueOf(porcentaje1));;
+            JTextField txtPorcentaje1 = new JTextField(String.valueOf(porcentaje1));
             txtPorcentaje1.setBounds(210, 10, 50, 20);
             dialogo4.add(txtPorcentaje1);
 
@@ -656,7 +654,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             lblUnidades2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dialogo4.add(lblUnidades2);
 
-            JTextField txtPorcentaje2 = new JTextField(String.valueOf(porcentaje2));;
+            JTextField txtPorcentaje2 = new JTextField(String.valueOf(porcentaje2));
             txtPorcentaje2.setBounds(210, 40, 50, 20);
             dialogo4.add(txtPorcentaje2);
 
@@ -707,53 +705,67 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         }
 
         if(e.getSource() == mItemConfigurarObsequios) {
-            JDialog dialogo5 = new JDialog(this, "Configurar obsequios", true);
+            JDialog dlgObsequios = new JDialog(this, "Configurar obsequios", true);
 
-            dialogo5.setResizable(false);
-            dialogo5.setLayout(null);
-            dialogo5.setResizable(false);
-            dialogo5.setSize(450, 280);
-            dialogo5.setLocationRelativeTo(this);
-            dialogo5.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dlgObsequios.setLayout(null);
+            dlgObsequios.setResizable(false);
+            dlgObsequios.setSize(450, 280);
+            dlgObsequios.setLocationRelativeTo(this);
+            dlgObsequios.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
             JLabel lblUnidades1 = new JLabel("1 unidad");
             lblUnidades1.setBounds(20,20,120,20);
             lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo5.add(lblUnidades1);
+            dlgObsequios.add(lblUnidades1);
 
-            JTextField txtObsequio1 = new JTextField(obsequio1);;
+            JTextField txtObsequio1 = new JTextField(obsequio1);
             txtObsequio1.setBounds(180, 20, 125, 20);
-            dialogo5.add(txtObsequio1);
+            dlgObsequios.add(txtObsequio1);
 
             JLabel lblUnidades2 = new JLabel("2 a 5 unidades");
             lblUnidades2.setBounds(20,50,120,20);
             lblUnidades2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo5.add(lblUnidades2);
+            dlgObsequios.add(lblUnidades2);
 
-            JTextField txtObsequio2 = new JTextField(obsequio2);;
+            JTextField txtObsequio2 = new JTextField(obsequio2);
             txtObsequio2.setBounds(180, 50, 125, 20);
-            dialogo5.add(txtObsequio2);
+            dlgObsequios.add(txtObsequio2);
 
             JLabel lblUnidades3 = new JLabel("6 a más unidades");
             lblUnidades3.setBounds(20,80,120,20);
             lblUnidades3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo5.add(lblUnidades3);
+            dlgObsequios.add(lblUnidades3);
 
-            JTextField txtObsequio3 = new JTextField(obsequio3);;
+            JTextField txtObsequio3 = new JTextField(obsequio3);
             txtObsequio3.setBounds(180, 80, 125, 20);
-            dialogo5.add(txtObsequio3);
+            dlgObsequios.add(txtObsequio3);
 
             JButton btnAceptar = new JButton("Aceptar");
             btnAceptar.setBounds(325, 20, 90, 20);
-            //btnAceptar.addActionListener(evt -> ...);
-            dialogo5.add(btnAceptar);
+            btnAceptar.addActionListener(evt -> {
+                if(txtObsequio1.getText().trim().isEmpty() || txtObsequio2.getText().trim().isEmpty() || txtObsequio3.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(
+                        dlgObsequios,
+                        "Debe completar todos los campos.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+                } else {
+                    obsequio1 = normalizarEspacios(txtObsequio1.getText());
+                    obsequio2 = normalizarEspacios(txtObsequio2.getText());
+                    obsequio3 = normalizarEspacios(txtObsequio3.getText());
+
+                    dlgObsequios.dispose();
+                }
+            });
+            dlgObsequios.add(btnAceptar);
 
             JButton btnCancelar = new JButton("Cancelar");
             btnCancelar.setBounds(325, 50, 90, 20);
-            btnCancelar.addActionListener(evt -> dialogo5.dispose());
-            dialogo5.add(btnCancelar);
+            btnCancelar.addActionListener(evt -> dlgObsequios.dispose());
+            dlgObsequios.add(btnCancelar);
 
-            dialogo5.setVisible(true);
+            dlgObsequios.setVisible(true);
         }
 
         if(e.getSource() == mItemAcercaDe) {
@@ -793,5 +805,9 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         txtArea.append("Fabricación  : " + anioFabricacion + "\n");
         txtArea.append("Garantía     : " + convertirBooleanoATexto(tieneGarantia) + "\n");
         txtArea.append("Stock        : " + stock);
+    }
+
+    public String normalizarEspacios(String texto) {
+        return texto.replaceAll("\\s+", " ").trim();
     }
 }
