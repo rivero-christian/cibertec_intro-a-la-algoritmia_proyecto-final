@@ -6,6 +6,10 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     // Constantes:
     private static final String TITULO = "Rvn10 Store 1.0";
 
+    private static final Font FUENTE_NORMAL = new Font("Segoe UI", Font.PLAIN, 14);
+    private static final Font FUENTE_NEGRITA = new Font("Segoe UI", Font.BOLD, 14);
+    private static final Font FUENTE_TITULO = new Font("Segoe UI", Font.BOLD, 20);
+
     //VARIABLES GLOBALES:
 
     // Datos del procesador #1
@@ -102,49 +106,62 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         setJMenuBar(menuBar);
 
         menuArchivo = new JMenu("Archivo");
+        menuArchivo.setFont(FUENTE_NORMAL);
         menuBar.add(menuArchivo);
 
         mItemSalir = new JMenuItem("Salir");
+        mItemSalir.setFont(FUENTE_NORMAL);
         mItemSalir.addActionListener(this);
         menuArchivo.add(mItemSalir);
 
         menuMantenimiento = new JMenu("Mantenimiento");
+        menuMantenimiento.setFont(FUENTE_NORMAL);
         menuBar.add(menuMantenimiento);
 
         mItemConsultar = new JMenuItem("Consultar CPU");
+        mItemConsultar.setFont(FUENTE_NORMAL);
         mItemConsultar.addActionListener(this);
         menuMantenimiento.add(mItemConsultar);
 
         mItemModificar = new JMenuItem("Modificar CPU");
+        mItemModificar.setFont(FUENTE_NORMAL);
         mItemModificar.addActionListener(this);
         menuMantenimiento.add(mItemModificar);
 
         mItemListar = new JMenuItem("Listar CPUs");
+        mItemListar.setFont(FUENTE_NORMAL);
         mItemListar.addActionListener(this);
         menuMantenimiento.add(mItemListar);
 
         menuVentas = new JMenu("Ventas");
+        menuVentas.setFont(FUENTE_NORMAL);
         menuBar.add(menuVentas);
 
         mItemVender = new JMenuItem("Vender");
+        mItemVender.setFont(FUENTE_NORMAL);
         mItemVender.addActionListener(this);
         menuVentas.add(mItemVender);
 
         menuConfiguracion = new JMenu("Configuración");
+        menuConfiguracion.setFont(FUENTE_NORMAL);
         menuBar.add(menuConfiguracion);
 
         mItemConfigurarDescuentos = new JMenuItem("Configurar descuentos");
+        mItemConfigurarDescuentos.setFont(FUENTE_NORMAL);
         mItemConfigurarDescuentos.addActionListener(this);
         menuConfiguracion.add(mItemConfigurarDescuentos);
 
         mItemConfigurarObsequios = new JMenuItem("Configurar obsequios");
+        mItemConfigurarObsequios.setFont(FUENTE_NORMAL);
         mItemConfigurarObsequios.addActionListener(this);
         menuConfiguracion.add(mItemConfigurarObsequios);
 
         menuAyuda = new JMenu("Ayuda");
+        menuAyuda.setFont(FUENTE_NORMAL);
         menuBar.add(menuAyuda);
 
         mItemAcercaDe = new JMenuItem("Acerca de Tienda");
+        mItemAcercaDe.setFont(FUENTE_NORMAL);
         mItemAcercaDe.addActionListener(this);
         menuAyuda.add(mItemAcercaDe);
 
@@ -626,82 +643,98 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         }
 
         if(e.getSource() == mItemConfigurarDescuentos) {
-            JDialog dialogo4 = new JDialog(this, "Configurar descuentos", true);
+            JDialog dlgDescuentos = new JDialog(this, "Configurar descuentos", true);
 
-            dialogo4.setResizable(false);
-            dialogo4.setLayout(null);
-            dialogo4.setResizable(false);
-            dialogo4.setSize(450, 280);
-            dialogo4.setLocationRelativeTo(this);
-            dialogo4.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dlgDescuentos.setResizable(false);
+            dlgDescuentos.setLayout(null);
+            dlgDescuentos.setResizable(false);
+            dlgDescuentos.setSize(450, 280);
+            dlgDescuentos.setLocationRelativeTo(this);
+            dlgDescuentos.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
             JLabel lblUnidades1 = new JLabel("1 a 5 unidades");
             lblUnidades1.setBounds(20,10,150,20);
             lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblUnidades1);
+            dlgDescuentos.add(lblUnidades1);
 
             JTextField txtPorcentaje1 = new JTextField(String.valueOf(porcentaje1));
             txtPorcentaje1.setBounds(210, 10, 50, 20);
-            dialogo4.add(txtPorcentaje1);
+            dlgDescuentos.add(txtPorcentaje1);
 
             JLabel lblPorcentaje1 = new JLabel("%");
             lblPorcentaje1.setBounds(270,10,20,20);
             lblPorcentaje1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblPorcentaje1);
+            dlgDescuentos.add(lblPorcentaje1);
 
             JLabel lblUnidades2 = new JLabel("6 a 10 unidades");
             lblUnidades2.setBounds(20,40,150,20);
             lblUnidades2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblUnidades2);
+            dlgDescuentos.add(lblUnidades2);
 
             JTextField txtPorcentaje2 = new JTextField(String.valueOf(porcentaje2));
             txtPorcentaje2.setBounds(210, 40, 50, 20);
-            dialogo4.add(txtPorcentaje2);
+            dlgDescuentos.add(txtPorcentaje2);
 
             JLabel lblPorcentaje2 = new JLabel("%");
             lblPorcentaje2.setBounds(270,40,20,20);
             lblPorcentaje2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblPorcentaje2);
+            dlgDescuentos.add(lblPorcentaje2);
 
             JLabel lblUnidades3 = new JLabel("11 a 15 unidades");
             lblUnidades3.setBounds(20,70,150,20);
             lblUnidades3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblUnidades3);
+            dlgDescuentos.add(lblUnidades3);
 
             JTextField txtPorcentaje3 = new JTextField(String.valueOf(porcentaje3));
             txtPorcentaje3.setBounds(210, 100, 50, 20);
-            dialogo4.add(txtPorcentaje3);
+            dlgDescuentos.add(txtPorcentaje3);
 
             JLabel lblPorcentaje3 = new JLabel("%");
             lblPorcentaje3.setBounds(270,100,20,20);
             lblPorcentaje3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblPorcentaje3);
+            dlgDescuentos.add(lblPorcentaje3);
 
             JLabel lblUnidades4 = new JLabel("Más de 15 unidades");
             lblUnidades4.setBounds(20,100,150,20);
             lblUnidades4.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblUnidades4);
+            dlgDescuentos.add(lblUnidades4);
 
             JTextField txtPorcentaje4 = new JTextField(String.valueOf(porcentaje4));
             txtPorcentaje4.setBounds(210, 70, 50, 20);
-            dialogo4.add(txtPorcentaje4);
+            dlgDescuentos.add(txtPorcentaje4);
 
             JLabel lblPorcentaje4 = new JLabel("%");
             lblPorcentaje4.setBounds(270,70,20,20);
             lblPorcentaje4.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo4.add(lblPorcentaje4);
+            dlgDescuentos.add(lblPorcentaje4);
 
             JButton btnAceptar = new JButton("Aceptar");
             btnAceptar.setBounds(325, 10, 90, 20);
-            //btnAceptar.addActionListener(evt -> ...);
-            dialogo4.add(btnAceptar);
+            btnAceptar.addActionListener(evt -> {
+                if(txtPorcentaje1.getText().trim().isEmpty() || txtPorcentaje2.getText().trim().isEmpty() || txtPorcentaje3.getText().trim().isEmpty() || txtPorcentaje4.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(
+                        dlgDescuentos,
+                        "Debe completar todos los campos.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                    );                    
+                } else {
+                    porcentaje1 = Double.parseDouble(normalizarEspacios(txtPorcentaje1.getText()));
+                    porcentaje2 = Double.parseDouble(normalizarEspacios(txtPorcentaje2.getText()));
+                    porcentaje3 = Double.parseDouble(normalizarEspacios(txtPorcentaje3.getText()));
+                    porcentaje4 = Double.parseDouble(normalizarEspacios(txtPorcentaje4.getText()));
+
+                    dlgDescuentos.dispose();
+                }   
+            });
+            dlgDescuentos.add(btnAceptar);
 
             JButton btnCancelar = new JButton("Cancelar");
             btnCancelar.setBounds(325, 40, 90, 20);
-            btnCancelar.addActionListener(evt -> dialogo4.dispose());
-            dialogo4.add(btnCancelar);
+            btnCancelar.addActionListener(evt -> dlgDescuentos.dispose());
+            dlgDescuentos.add(btnCancelar);
 
-            dialogo4.setVisible(true);
+            dlgDescuentos.setVisible(true);
         }
 
         if(e.getSource() == mItemConfigurarObsequios) {
