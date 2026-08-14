@@ -356,18 +356,18 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == mItemModificar) {
-            JDialog dialogo2 = new JDialog(this, "Modificar CPU", true);
+            JDialog dlgModificar = new JDialog(this, "Modificar CPU", true);
 
-            dialogo2.setLayout(null);
-            dialogo2.setResizable(false);
-            dialogo2.setSize(450, 280);
-            dialogo2.setLocationRelativeTo(this);
-            dialogo2.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dlgModificar.setLayout(null);
+            dlgModificar.setResizable(false);
+            dlgModificar.setSize(450, 280);
+            dlgModificar.setLocationRelativeTo(this);
+            dlgModificar.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
             JLabel lblModelo = new JLabel("Modelo");
             lblModelo.setBounds(20,10,80,20);
             lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo2.add(lblModelo);
+            dlgModificar.add(lblModelo);
 
             JComboBox<String> cboModelo = new JComboBox<>();
             cboModelo.addItem(modelo1);
@@ -379,75 +379,141 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             cboModelo.addItem(modelo7);
             cboModelo.setBounds(150, 10, 150, 20);
 
-            dialogo2.add(cboModelo);
+            dlgModificar.add(cboModelo);
 
             JLabel lblId = new JLabel("ID");
             lblId.setBounds(20,40,80,20);
             lblId.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo2.add(lblId);
+            dlgModificar.add(lblId);
 
             JTextField txtId = new JTextField(id1);
             txtId.setBounds(150,40,150,20);
-            dialogo2.add(txtId);
+            dlgModificar.add(txtId);
 
             JLabel lblFabricante = new JLabel("Fabricante");
             lblFabricante.setBounds(20,70,80,20);
             lblFabricante.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo2.add(lblFabricante);
+            dlgModificar.add(lblFabricante);
 
             JTextField txtFabricante = new JTextField(fabricante1);
             txtFabricante.setBounds(150,70,150,20);
-            dialogo2.add(txtFabricante);
+            dlgModificar.add(txtFabricante);
 
             JLabel lblPrecio = new JLabel("Precio (S/.)");
             lblPrecio.setBounds(20,100,80,20);
             lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo2.add(lblPrecio);
+            dlgModificar.add(lblPrecio);
 
             JTextField txtPrecio = new JTextField(precio1.toString());
             txtPrecio.setBounds(150,100,150,20);
-            dialogo2.add(txtPrecio);
+            dlgModificar.add(txtPrecio);
 
             JLabel lblAnio = new JLabel("Año");
             lblAnio.setBounds(20,130,80,20);
             lblAnio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo2.add(lblAnio);
+            dlgModificar.add(lblAnio);
 
             JTextField txtAnio = new JTextField(String.valueOf(anioFabricacion1));
             txtAnio.setBounds(150,130,150,20);
-            dialogo2.add(txtAnio);
+            dlgModificar.add(txtAnio);
 
             JLabel lblGarantia = new JLabel("Garantía");
             lblGarantia.setBounds(20,160,80,20);
             lblGarantia.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo2.add(lblGarantia);
+            dlgModificar.add(lblGarantia);
 
             JComboBox<String> cboGarantia = new JComboBox<>();
             cboGarantia.addItem("Sí");
             cboGarantia.addItem("No");
             cboGarantia.setSelectedIndex(tieneGarantia1 ? 0 : 1);
             cboGarantia.setBounds(150,160,150,20);
-            dialogo2.add(cboGarantia);
+            dlgModificar.add(cboGarantia);
 
             JLabel lblStock = new JLabel("Stock");
             lblStock.setBounds(20,190,80,20);
             lblStock.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
-            dialogo2.add(lblStock);
+            dlgModificar.add(lblStock);
 
             JTextField txtStock = new JTextField(String.valueOf(stock1));
             txtStock.setBounds(150,190,150,20);
-            dialogo2.add(txtStock);
+            dlgModificar.add(txtStock);
 
             JButton btnCerrar = new JButton("Cerrar");
             btnCerrar.setBounds(350,10,85,20);
-            btnCerrar.addActionListener(evt -> dialogo2.dispose());
-            dialogo2.add(btnCerrar);
+            btnCerrar.addActionListener(evt -> dlgModificar.dispose());
+            dlgModificar.add(btnCerrar);
 
             JButton btnGuardar = new JButton("Guardar");
             btnGuardar.setBounds(350,40,85,20);
-            btnGuardar.setEnabled(false);
-            //btnGuardar.addActionListener(evt -> dialogo2.dispose());
-            dialogo2.add(btnGuardar);
+            //btnGuardar.setEnabled(false);
+            btnGuardar.addActionListener(evt -> {
+                switch (cboModelo.getSelectedIndex()) {
+                    case 0:
+                        id1 = txtId.getText();
+                        fabricante1 = txtFabricante.getText();
+                        precio1 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                        anioFabricacion1 = Integer.parseInt(txtAnio.getText());
+                        tieneGarantia1 = cboGarantia.getSelectedIndex() == 0;
+                        stock1 = Integer.parseInt(txtStock.getText());
+                        break;
+                        
+                    case 1:
+                        id2 = txtId.getText();
+                        fabricante2 = txtFabricante.getText();
+                        precio2 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                        anioFabricacion2 = Integer.parseInt(txtAnio.getText());
+                        tieneGarantia2 = cboGarantia.getSelectedIndex() == 0;
+                        stock2 = Integer.parseInt(txtStock.getText());
+                        break;
+                        
+                    case 2:
+                        id3 = txtId.getText();
+                        fabricante3 = txtFabricante.getText();
+                        precio3 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                        anioFabricacion3 = Integer.parseInt(txtAnio.getText());
+                        tieneGarantia3 = cboGarantia.getSelectedIndex() == 0;
+                        stock3 = Integer.parseInt(txtStock.getText());
+                        break;
+
+                    case 3:
+                        id4 = txtId.getText();
+                        fabricante4 = txtFabricante.getText();
+                        precio4 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                        anioFabricacion4 = Integer.parseInt(txtAnio.getText());
+                        tieneGarantia4 = cboGarantia.getSelectedIndex() == 0;
+                        stock4 = Integer.parseInt(txtStock.getText());
+                        break;
+
+                    case 4:
+                        id5 = txtId.getText();
+                        fabricante5 = txtFabricante.getText();
+                        precio5 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                        anioFabricacion5 = Integer.parseInt(txtAnio.getText());
+                        tieneGarantia5 = cboGarantia.getSelectedIndex() == 0;
+                        stock5 = Integer.parseInt(txtStock.getText());
+                        break;
+
+                    case 5:
+                        id6 = txtId.getText();
+                        fabricante6 = txtFabricante.getText();
+                        precio6 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                        anioFabricacion6 = Integer.parseInt(txtAnio.getText());
+                        tieneGarantia6 = cboGarantia.getSelectedIndex() == 0;
+                        stock6 = Integer.parseInt(txtStock.getText());
+                        break;
+
+                    case 6:
+                        id7 = txtId.getText();
+                        fabricante7 = txtFabricante.getText();
+                        precio7 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                        anioFabricacion7 = Integer.parseInt(txtAnio.getText());
+                        tieneGarantia7 = cboGarantia.getSelectedIndex() == 0;
+                        stock7 = Integer.parseInt(txtStock.getText());
+                        break;
+                }    
+                dlgModificar.dispose();
+            });
+            dlgModificar.add(btnGuardar);
 
             cboModelo.addActionListener(event -> {
                 switch (cboModelo.getSelectedIndex()) {
@@ -516,7 +582,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                 }
             });
 
-            dialogo2.setVisible(true);
+            dlgModificar.setVisible(true);
         }
 
         if (e.getSource() == mItemListar) {
