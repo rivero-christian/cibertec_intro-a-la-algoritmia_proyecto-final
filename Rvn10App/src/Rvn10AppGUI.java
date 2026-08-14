@@ -586,36 +586,48 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == mItemListar) {
-            JDialog dialogo3 = new JDialog(this, "Listado de CPUs", true);
-            dialogo3.setResizable(false);
+            JDialog dlgListar = new JDialog(this, "Listado de CPUs", true);
+            dlgListar.setResizable(false);
+            dlgListar.setSize(520, 450);
+            dlgListar.setLocationRelativeTo(this);
+            dlgListar.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dlgListar.setLayout(new BorderLayout()); //antes: dlgListar.setLayout(null);
 
-            JTextArea txtArea = new JTextArea();
-            txtArea.setEditable(false);
-            txtArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+            JTextArea txtReporte = new JTextArea();
+            txtReporte.setEditable(false);
+            txtReporte.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-            JScrollPane scroll = new JScrollPane(txtArea);
+            JScrollPane scroll = new JScrollPane(txtReporte);
 
-            dialogo3.add(scroll);
+            dlgListar.add(scroll, BorderLayout.CENTER);
 
-            txtArea.append("""
-            =======================================================================
-                                          LISTADO DE CPUs
-            =======================================================================
-            """);
+            JPanel panelBotones = new JPanel();
 
-            mostrarCPU(txtArea, id1, modelo1, fabricante1, precio1, anioFabricacion1, tieneGarantia1, stock1);
-            mostrarCPU(txtArea, id2, modelo2, fabricante2, precio2, anioFabricacion2, tieneGarantia2, stock2);
-            mostrarCPU(txtArea, id3, modelo3, fabricante3, precio3, anioFabricacion3, tieneGarantia3, stock3);
-            mostrarCPU(txtArea, id4, modelo4, fabricante4, precio4, anioFabricacion4, tieneGarantia4, stock4);
-            mostrarCPU(txtArea, id5, modelo5, fabricante5, precio5, anioFabricacion5, tieneGarantia5, stock5);
-            mostrarCPU(txtArea, id6, modelo6, fabricante6, precio6, anioFabricacion6, tieneGarantia6, stock6);
-            mostrarCPU(txtArea, id7, modelo7, fabricante7, precio7, anioFabricacion7, tieneGarantia7, stock7);
+            JButton btnCerrar = new JButton("Cerrar");
+            btnCerrar.addActionListener(evt -> dlgListar.dispose());
+            
+            JButton btnListar = new JButton("Listar");
+            btnListar.addActionListener(evt1 -> {
+                txtReporte.append("LISTADO DE CPUs");
 
-            dialogo3.setSize(520, 450);
-            dialogo3.setLocationRelativeTo(this);
-            dialogo3.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            txtArea.setCaretPosition(0);
-            dialogo3.setVisible(true);
+                mostrarCPU(txtReporte, id1, modelo1, fabricante1, precio1, anioFabricacion1, tieneGarantia1, stock1);
+                mostrarCPU(txtReporte, id2, modelo2, fabricante2, precio2, anioFabricacion2, tieneGarantia2, stock2);
+                mostrarCPU(txtReporte, id3, modelo3, fabricante3, precio3, anioFabricacion3, tieneGarantia3, stock3);
+                mostrarCPU(txtReporte, id4, modelo4, fabricante4, precio4, anioFabricacion4, tieneGarantia4, stock4);
+                mostrarCPU(txtReporte, id5, modelo5, fabricante5, precio5, anioFabricacion5, tieneGarantia5, stock5);
+                mostrarCPU(txtReporte, id6, modelo6, fabricante6, precio6, anioFabricacion6, tieneGarantia6, stock6);
+                mostrarCPU(txtReporte, id7, modelo7, fabricante7, precio7, anioFabricacion7, tieneGarantia7, stock7);
+
+                txtReporte.setCaretPosition(0);
+                btnListar.setEnabled(false);
+            });
+
+            panelBotones.add(btnCerrar);
+            panelBotones.add(btnListar);
+
+            dlgListar.add(panelBotones, BorderLayout.SOUTH);
+            
+            dlgListar.setVisible(true);
         }
 
         if(e.getSource() == mItemVender) {
