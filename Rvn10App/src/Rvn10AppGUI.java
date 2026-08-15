@@ -447,71 +447,83 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             btnGuardar.setBounds(350,40,85,20);
             //btnGuardar.setEnabled(false);
             btnGuardar.addActionListener(evt -> {
-                switch (cboModelo.getSelectedIndex()) {
-                    case 0:
-                        id1 = txtId.getText();
-                        fabricante1 = txtFabricante.getText();
-                        precio1 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
-                        anioFabricacion1 = Integer.parseInt(txtAnio.getText());
-                        tieneGarantia1 = cboGarantia.getSelectedIndex() == 0;
-                        stock1 = Integer.parseInt(txtStock.getText());
-                        break;
+                if(tieneGarantia1) { // condicion, solo para probar
+                    switch(cboModelo.getSelectedIndex()) {
+                        case 0:
+                            id1 = txtId.getText();
+                            fabricante1 = txtFabricante.getText();
+                            precio1 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                            anioFabricacion1 = Integer.parseInt(txtAnio.getText());
+                            tieneGarantia1 = cboGarantia.getSelectedIndex() == 0;
+                            stock1 = Integer.parseInt(txtStock.getText());
+                            break;
                         
-                    case 1:
-                        id2 = txtId.getText();
-                        fabricante2 = txtFabricante.getText();
-                        precio2 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
-                        anioFabricacion2 = Integer.parseInt(txtAnio.getText());
-                        tieneGarantia2 = cboGarantia.getSelectedIndex() == 0;
-                        stock2 = Integer.parseInt(txtStock.getText());
-                        break;
-                        
-                    case 2:
-                        id3 = txtId.getText();
-                        fabricante3 = txtFabricante.getText();
-                        precio3 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
-                        anioFabricacion3 = Integer.parseInt(txtAnio.getText());
-                        tieneGarantia3 = cboGarantia.getSelectedIndex() == 0;
-                        stock3 = Integer.parseInt(txtStock.getText());
-                        break;
+                        case 1:
+                            id2 = txtId.getText();
+                            fabricante2 = txtFabricante.getText();
+                            precio2 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                            anioFabricacion2 = Integer.parseInt(txtAnio.getText());
+                            tieneGarantia2 = cboGarantia.getSelectedIndex() == 0;
+                            stock2 = Integer.parseInt(txtStock.getText());
+                            break;
+                            
+                        case 2:
+                            id3 = txtId.getText();
+                            fabricante3 = txtFabricante.getText();
+                            precio3 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                            anioFabricacion3 = Integer.parseInt(txtAnio.getText());
+                            tieneGarantia3 = cboGarantia.getSelectedIndex() == 0;
+                            stock3 = Integer.parseInt(txtStock.getText());
+                            break;
 
-                    case 3:
-                        id4 = txtId.getText();
-                        fabricante4 = txtFabricante.getText();
-                        precio4 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
-                        anioFabricacion4 = Integer.parseInt(txtAnio.getText());
-                        tieneGarantia4 = cboGarantia.getSelectedIndex() == 0;
-                        stock4 = Integer.parseInt(txtStock.getText());
-                        break;
+                        case 3:
+                            id4 = txtId.getText();
+                            fabricante4 = txtFabricante.getText();
+                            precio4 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                            anioFabricacion4 = Integer.parseInt(txtAnio.getText());
+                            tieneGarantia4 = cboGarantia.getSelectedIndex() == 0;
+                            stock4 = Integer.parseInt(txtStock.getText());
+                            break;
 
-                    case 4:
-                        id5 = txtId.getText();
-                        fabricante5 = txtFabricante.getText();
-                        precio5 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
-                        anioFabricacion5 = Integer.parseInt(txtAnio.getText());
-                        tieneGarantia5 = cboGarantia.getSelectedIndex() == 0;
-                        stock5 = Integer.parseInt(txtStock.getText());
-                        break;
+                        case 4:
+                            id5 = txtId.getText();
+                            fabricante5 = txtFabricante.getText();
+                            precio5 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                            anioFabricacion5 = Integer.parseInt(txtAnio.getText());
+                            tieneGarantia5 = cboGarantia.getSelectedIndex() == 0;
+                            stock5 = Integer.parseInt(txtStock.getText());
+                            break;
 
-                    case 5:
-                        id6 = txtId.getText();
-                        fabricante6 = txtFabricante.getText();
-                        precio6 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
-                        anioFabricacion6 = Integer.parseInt(txtAnio.getText());
-                        tieneGarantia6 = cboGarantia.getSelectedIndex() == 0;
-                        stock6 = Integer.parseInt(txtStock.getText());
-                        break;
+                        case 5:
+                            id6 = txtId.getText();
+                            fabricante6 = txtFabricante.getText();
+                            precio6 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                            anioFabricacion6 = Integer.parseInt(txtAnio.getText());
+                            tieneGarantia6 = cboGarantia.getSelectedIndex() == 0;
+                            stock6 = Integer.parseInt(txtStock.getText());
+                            break;
 
-                    case 6:
-                        id7 = txtId.getText();
-                        fabricante7 = txtFabricante.getText();
-                        precio7 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
-                        anioFabricacion7 = Integer.parseInt(txtAnio.getText());
-                        tieneGarantia7 = cboGarantia.getSelectedIndex() == 0;
-                        stock7 = Integer.parseInt(txtStock.getText());
-                        break;
-                }    
-                dlgModificar.dispose();
+                        case 6:
+                            id7 = txtId.getText();
+                            fabricante7 = txtFabricante.getText();
+                            precio7 = new BigDecimal(Double.parseDouble(txtPrecio.getText()));
+                            anioFabricacion7 = Integer.parseInt(txtAnio.getText());
+                            tieneGarantia7 = cboGarantia.getSelectedIndex() == 0;
+                            stock7 = Integer.parseInt(txtStock.getText());
+                            break;
+                    }
+
+                    JOptionPane.showMessageDialog(
+                        dlgModificar,
+                        "Los campos se guardaron correctamente.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    dlgModificar.dispose();
+                } else {
+                    System.out.println("mostrar mensaje de error");
+                }   
             });
             dlgModificar.add(btnGuardar);
 
@@ -795,7 +807,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                         "Debe completar todos los campos.",
                         "Advertencia",
                         JOptionPane.WARNING_MESSAGE
-                    );                    
+                    );
                 } else {
                     porcentaje1 = Double.parseDouble(normalizarEspacios(txtPorcentaje1.getText()));
                     porcentaje2 = Double.parseDouble(normalizarEspacios(txtPorcentaje2.getText()));
