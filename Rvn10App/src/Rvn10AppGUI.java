@@ -2,15 +2,18 @@ import java.math.BigDecimal;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.math.RoundingMode;
+
 public class Rvn10AppGUI extends JFrame implements ActionListener {
     // Constantes:
     private static final String TITULO = "Rvn10 Store 1.0";
-
     private static final Font FUENTE_NORMAL = new Font("Segoe UI", Font.PLAIN, 14);
-    private static final Font FUENTE_NEGRITA = new Font("Segoe UI", Font.BOLD, 14);
-    private static final Font FUENTE_TITULO = new Font("Segoe UI", Font.BOLD, 20);
+    public static BigDecimal cuotaDiaria = new BigDecimal("50000");
 
-    //VARIABLES GLOBALES:
+    /*********************** VARIABLES GLOBALES: ***********************/
+    // Contador y acumulador
+    public static int cantidadVentas = 0;
+    public static BigDecimal importeAcumulado = new BigDecimal(0);
 
     // Datos del procesador #1
     public static String id1 = "proc-001";
@@ -99,7 +102,8 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
     public Rvn10AppGUI() {
         setTitle(TITULO);
-        setBounds(550, 200, 813, 623);
+        setBounds(550, 200, 700, 520);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         menuBar = new JMenuBar();
@@ -172,11 +176,11 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mItemSalir) {
             int respuesta =JOptionPane.showConfirmDialog(
-                    this,
-                    "¿Estás seguro de que deseas salir?",
-                    "Confirmar salida",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE
+                this,
+                "¿Estás seguro de que deseas salir?",
+                "Confirmar salida",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
             );
 
             if(respuesta == JOptionPane.YES_OPTION)
@@ -204,7 +208,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblModelo = new JLabel("Modelo");
             lblModelo.setBounds(20,10,100,20);
-            lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             panelPrincipal.add(lblModelo);
 
             JComboBox<String> cboModelo = new JComboBox<>();
@@ -221,7 +224,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblId = new JLabel("ID");
             lblId.setBounds(20,40,100,20);
-            lblId.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             panelPrincipal.add(lblId);
 
             JTextField txtId = new JTextField(id1);
@@ -231,7 +233,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblFabricante = new JLabel("Fabricante");
             lblFabricante.setBounds(20,70,100,20);
-            lblFabricante.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             panelPrincipal.add(lblFabricante);
 
             JTextField txtFabricante = new JTextField(fabricante1);
@@ -241,7 +242,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblPrecio = new JLabel("Precio (S/.)");
             lblPrecio.setBounds(20,100,100,20);
-            lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             panelPrincipal.add(lblPrecio);
 
             JTextField txtPrecio = new JTextField(precio1.toString());
@@ -251,7 +251,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblAnio = new JLabel("Año");
             lblAnio.setBounds(20,130,100,20);
-            lblAnio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             panelPrincipal.add(lblAnio);
 
             JTextField txtAnio = new JTextField(String.valueOf(anioFabricacion1));
@@ -261,7 +260,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblGarantia = new JLabel("Garantía");
             lblGarantia.setBounds(20,160,100,20);
-            lblGarantia.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             panelPrincipal.add(lblGarantia);
 
             JTextField txtGarantia = new JTextField(convertirBooleanoATexto(tieneGarantia1));
@@ -271,7 +269,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblStock = new JLabel("Stock");
             lblStock.setBounds(20, 190, 100, 20);
-            lblStock.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             panelPrincipal.add(lblStock);
 
             JTextField txtStock = new JTextField(String.valueOf(stock1));
@@ -281,11 +278,11 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JButton btnCerrar = new JButton("Cerrar");
             btnCerrar.setBounds(325,10,85,25);
-            btnCerrar.addActionListener(evt -> dialogo1.dispose());
+            btnCerrar.addActionListener(_ -> dialogo1.dispose());
 
             panelPrincipal.add(btnCerrar);
 
-            cboModelo.addActionListener(event -> {
+            cboModelo.addActionListener(_ -> {
                 switch(cboModelo.getSelectedIndex()) {
                     case 0:
                         txtId.setText(id1);
@@ -366,7 +363,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblModelo = new JLabel("Modelo");
             lblModelo.setBounds(20,10,80,20);
-            lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgModificar.add(lblModelo);
 
             JComboBox<String> cboModelo = new JComboBox<>();
@@ -383,7 +379,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblId = new JLabel("ID");
             lblId.setBounds(20,40,80,20);
-            lblId.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgModificar.add(lblId);
 
             JTextField txtId = new JTextField(id1);
@@ -392,7 +387,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblFabricante = new JLabel("Fabricante");
             lblFabricante.setBounds(20,70,80,20);
-            lblFabricante.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgModificar.add(lblFabricante);
 
             JTextField txtFabricante = new JTextField(fabricante1);
@@ -401,7 +395,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblPrecio = new JLabel("Precio (S/.)");
             lblPrecio.setBounds(20,100,80,20);
-            lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgModificar.add(lblPrecio);
 
             JTextField txtPrecio = new JTextField(precio1.toString());
@@ -410,7 +403,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblAnio = new JLabel("Año");
             lblAnio.setBounds(20,130,80,20);
-            lblAnio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgModificar.add(lblAnio);
 
             JTextField txtAnio = new JTextField(String.valueOf(anioFabricacion1));
@@ -419,7 +411,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblGarantia = new JLabel("Garantía");
             lblGarantia.setBounds(20,160,80,20);
-            lblGarantia.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgModificar.add(lblGarantia);
 
             JComboBox<String> cboGarantia = new JComboBox<>();
@@ -431,7 +422,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblStock = new JLabel("Stock");
             lblStock.setBounds(20,190,80,20);
-            lblStock.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgModificar.add(lblStock);
 
             JTextField txtStock = new JTextField(String.valueOf(stock1));
@@ -440,14 +430,13 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JButton btnCerrar = new JButton("Cerrar");
             btnCerrar.setBounds(350,10,85,20);
-            btnCerrar.addActionListener(evt -> dlgModificar.dispose());
+            btnCerrar.addActionListener(_ -> dlgModificar.dispose());
             dlgModificar.add(btnCerrar);
 
             JButton btnGuardar = new JButton("Guardar");
             btnGuardar.setBounds(350,40,85,20);
-            //btnGuardar.setEnabled(false);
-            btnGuardar.addActionListener(evt -> {
-                if(tieneGarantia1) { // condicion, solo para probar
+            btnGuardar.addActionListener(_ -> {
+                if(tieneGarantia1) {
                     switch(cboModelo.getSelectedIndex()) {
                         case 0:
                             id1 = txtId.getText();
@@ -527,7 +516,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             });
             dlgModificar.add(btnGuardar);
 
-            cboModelo.addActionListener(event -> {
+            cboModelo.addActionListener(_ -> {
                 switch (cboModelo.getSelectedIndex()) {
                     case 0:
                         txtId.setText(id1);
@@ -603,7 +592,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             dlgListar.setSize(520, 450);
             dlgListar.setLocationRelativeTo(this);
             dlgListar.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dlgListar.setLayout(new BorderLayout()); //antes: dlgListar.setLayout(null);
+            dlgListar.setLayout(new BorderLayout());
 
             JTextArea txtReporte = new JTextArea();
             txtReporte.setEditable(false);
@@ -616,10 +605,10 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             JPanel panelBotones = new JPanel();
 
             JButton btnCerrar = new JButton("Cerrar");
-            btnCerrar.addActionListener(evt -> dlgListar.dispose());
+            btnCerrar.addActionListener(_ -> dlgListar.dispose());
             
             JButton btnListar = new JButton("Listar");
-            btnListar.addActionListener(evt1 -> {
+            btnListar.addActionListener(_ -> {
                 txtReporte.append("LISTADO DE CPUs");
 
                 mostrarCPU(txtReporte, id1, modelo1, fabricante1, precio1, anioFabricacion1, tieneGarantia1, stock1);
@@ -654,7 +643,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblModelo = new JLabel("Modelo");
             lblModelo.setBounds(20,20,70,20);
-            lblModelo.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgVender.add(lblModelo);
 
             JComboBox<String> cboModelo = new JComboBox<>();
@@ -670,7 +658,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblPrecio = new JLabel("Precio(S/.)");
             lblPrecio.setBounds(20,50,70,20);
-            lblPrecio.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgVender.add(lblPrecio);
 
             JTextField txtPrecio = new JTextField(String.valueOf(precio1));
@@ -680,24 +667,90 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblCantidad = new JLabel("Cantidad");
             lblCantidad.setBounds(20,80,70,20);
-            lblCantidad.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgVender.add(lblCantidad);
 
             JTextField txtCantidad = new JTextField();
             txtCantidad.setBounds(120, 80, 150, 20);
             dlgVender.add(txtCantidad);
 
+            JTextArea txtBoleta = new JTextArea();
+            txtBoleta.setEditable(false);
+            txtBoleta.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            txtBoleta.setBounds(20, 140, 545, 210);
+            dlgVender.add(txtBoleta);
+
             JButton btnVender = new JButton("Vender");
             btnVender.setBounds(325, 20, 90, 20);
-            //btnVender.addActionListener(evt -> ...);
             dlgVender.add(btnVender);
+
+            btnVender.addActionListener(_ -> {
+                String nombre = JOptionPane.showInputDialog(
+                    null,
+                    "Ingrese nombre:",
+                    "Nombre",
+                    JOptionPane.QUESTION_MESSAGE
+                );
+
+                String dni = JOptionPane.showInputDialog(
+                    null,
+                    "Ingrese DNI:",
+                    "DNI",
+                    JOptionPane.QUESTION_MESSAGE
+                );
+
+                cboModelo.setEnabled(false);
+                btnVender.setEnabled(false);
+                txtCantidad.setEditable(false);
+
+                BigDecimal precio = new BigDecimal(txtPrecio.getText());
+                int cantidad = Integer.parseInt(txtCantidad.getText());
+
+                BigDecimal importeCompra = precio.multiply(BigDecimal.valueOf(cantidad));
+                BigDecimal importeDescuento = importeCompra.multiply(BigDecimal.valueOf(calcularDescuento(cantidad)/100)).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal importePagar = importeCompra.subtract(importeDescuento).setScale(2, RoundingMode.HALF_UP);
+
+                txtBoleta.append("BOLETA DE VENTA\n\n");
+
+                if(nombre.compareTo("")!=0)
+                    txtBoleta.append("Nombre               : "+nombre+"\n");
+
+                if(dni.compareTo("")!=0)
+                    txtBoleta.append("DNI                  : "+dni+"\n");
+
+                txtBoleta.append("Modelo               : "+cboModelo.getSelectedItem()+"\n");
+                txtBoleta.append("Precio               : S/. "+txtPrecio.getText()+"\n");
+                txtBoleta.append("Cantidad             : "+txtCantidad.getText()+"\n");
+                txtBoleta.append("Importe Compra       : S/. "+importeCompra+"\n");
+                txtBoleta.append("Importe Descuento    : S/. "+importeDescuento+"\n");
+                txtBoleta.append("Importe a pagar      : S/. "+importePagar+"\n");
+                txtBoleta.append("Obsequio             : "+obtenerObsequio(cantidad) +"\n");
+
+                cantidadVentas++;
+
+                importeAcumulado = importeAcumulado.add(importePagar);
+
+                if(cantidadVentas%5 == 0) {
+                    BigDecimal porcentaje = importeAcumulado.divide(cuotaDiaria, 2, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100));
+
+                    String mensaje = "Venta Nro. " + cantidadVentas + "\n" +
+                            "Importe total general acumulado : S/. " + importeAcumulado + "\n" +
+                            "Porcentaje de la cuota diaria : "+porcentaje+" %";
+
+                    JOptionPane.showMessageDialog(
+                        null,
+                        mensaje,
+                        "Avance de ventas",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            });
 
             JButton btnCerrar = new JButton("Cerrar");
             btnCerrar.setBounds(325, 50, 90, 20);
-            btnCerrar.addActionListener(evt -> dlgVender.dispose());
+            btnCerrar.addActionListener(_ -> dlgVender.dispose());
             dlgVender.add(btnCerrar);
 
-            cboModelo.addActionListener(event -> {
+            cboModelo.addActionListener(_ -> {
                 switch (cboModelo.getSelectedIndex()) {
                     case 0:
                         txtPrecio.setText(precio1.toString());
@@ -744,7 +797,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblUnidades1 = new JLabel("1 a 5 unidades");
             lblUnidades1.setBounds(20,10,150,20);
-            lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblUnidades1);
 
             JTextField txtPorcentaje1 = new JTextField(String.valueOf(porcentaje1));
@@ -753,12 +805,10 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblPorcentaje1 = new JLabel("%");
             lblPorcentaje1.setBounds(270,10,20,20);
-            lblPorcentaje1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblPorcentaje1);
 
             JLabel lblUnidades2 = new JLabel("6 a 10 unidades");
             lblUnidades2.setBounds(20,40,150,20);
-            lblUnidades2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblUnidades2);
 
             JTextField txtPorcentaje2 = new JTextField(String.valueOf(porcentaje2));
@@ -767,40 +817,35 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblPorcentaje2 = new JLabel("%");
             lblPorcentaje2.setBounds(270,40,20,20);
-            lblPorcentaje2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblPorcentaje2);
 
             JLabel lblUnidades3 = new JLabel("11 a 15 unidades");
             lblUnidades3.setBounds(20,70,150,20);
-            lblUnidades3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblUnidades3);
 
             JTextField txtPorcentaje3 = new JTextField(String.valueOf(porcentaje3));
-            txtPorcentaje3.setBounds(210, 100, 50, 20);
+            txtPorcentaje3.setBounds(210, 70, 50, 20);
             dlgDescuentos.add(txtPorcentaje3);
 
             JLabel lblPorcentaje3 = new JLabel("%");
             lblPorcentaje3.setBounds(270,100,20,20);
-            lblPorcentaje3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblPorcentaje3);
 
             JLabel lblUnidades4 = new JLabel("Más de 15 unidades");
             lblUnidades4.setBounds(20,100,150,20);
-            lblUnidades4.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblUnidades4);
 
             JTextField txtPorcentaje4 = new JTextField(String.valueOf(porcentaje4));
-            txtPorcentaje4.setBounds(210, 70, 50, 20);
+            txtPorcentaje4.setBounds(210, 100, 50, 20);
             dlgDescuentos.add(txtPorcentaje4);
 
             JLabel lblPorcentaje4 = new JLabel("%");
             lblPorcentaje4.setBounds(270,70,20,20);
-            lblPorcentaje4.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgDescuentos.add(lblPorcentaje4);
 
             JButton btnAceptar = new JButton("Aceptar");
             btnAceptar.setBounds(325, 10, 90, 20);
-            btnAceptar.addActionListener(evt -> {
+            btnAceptar.addActionListener(_ -> {
                 if(txtPorcentaje1.getText().trim().isEmpty() || txtPorcentaje2.getText().trim().isEmpty() || txtPorcentaje3.getText().trim().isEmpty() || txtPorcentaje4.getText().trim().isEmpty()) {
                     JOptionPane.showMessageDialog(
                         dlgDescuentos,
@@ -817,11 +862,12 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                     dlgDescuentos.dispose();
                 }   
             });
+
             dlgDescuentos.add(btnAceptar);
 
             JButton btnCancelar = new JButton("Cancelar");
             btnCancelar.setBounds(325, 40, 90, 20);
-            btnCancelar.addActionListener(evt -> dlgDescuentos.dispose());
+            btnCancelar.addActionListener(_ -> dlgDescuentos.dispose());
             dlgDescuentos.add(btnCancelar);
 
             dlgDescuentos.setVisible(true);
@@ -838,7 +884,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblUnidades1 = new JLabel("1 unidad");
             lblUnidades1.setBounds(20,20,120,20);
-            lblUnidades1.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgObsequios.add(lblUnidades1);
 
             JTextField txtObsequio1 = new JTextField(obsequio1);
@@ -847,7 +892,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblUnidades2 = new JLabel("2 a 5 unidades");
             lblUnidades2.setBounds(20,50,120,20);
-            lblUnidades2.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgObsequios.add(lblUnidades2);
 
             JTextField txtObsequio2 = new JTextField(obsequio2);
@@ -856,7 +900,6 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JLabel lblUnidades3 = new JLabel("6 a más unidades");
             lblUnidades3.setBounds(20,80,120,20);
-            lblUnidades3.setBorder(BorderFactory.createLineBorder(Color.RED)); // borrar
             dlgObsequios.add(lblUnidades3);
 
             JTextField txtObsequio3 = new JTextField(obsequio3);
@@ -865,7 +908,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
             JButton btnAceptar = new JButton("Aceptar");
             btnAceptar.setBounds(325, 20, 90, 20);
-            btnAceptar.addActionListener(evt -> {
+            btnAceptar.addActionListener(_ -> {
                 if(txtObsequio1.getText().trim().isEmpty() || txtObsequio2.getText().trim().isEmpty() || txtObsequio3.getText().trim().isEmpty()) {
                     JOptionPane.showMessageDialog(
                         dlgObsequios,
@@ -881,11 +924,12 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
                     dlgObsequios.dispose();
                 }
             });
+
             dlgObsequios.add(btnAceptar);
 
             JButton btnCancelar = new JButton("Cancelar");
             btnCancelar.setBounds(325, 50, 90, 20);
-            btnCancelar.addActionListener(evt -> dlgObsequios.dispose());
+            btnCancelar.addActionListener(_ -> dlgObsequios.dispose());
             dlgObsequios.add(btnCancelar);
 
             dlgObsequios.setVisible(true);
@@ -901,6 +945,7 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             - Mg. Christian Rivero Valencia
             - Ing. Sergio Cabrera Cueva
 
+            www.rvndiez.com
             Teléfono: (+51) 999-999-999
             E-mail: support@rvn10.com
 
@@ -908,10 +953,10 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
             """;
 
             JOptionPane.showMessageDialog(
-                    this,
-                    mensaje,
-                    "Acerca de",
-                    JOptionPane.INFORMATION_MESSAGE
+                this,
+                mensaje,
+                "Acerca de",
+                JOptionPane.INFORMATION_MESSAGE
             );
         }
     }
@@ -932,5 +977,25 @@ public class Rvn10AppGUI extends JFrame implements ActionListener {
 
     public String normalizarEspacios(String texto) {
         return texto.replaceAll("\\s+", " ").trim();
+    }
+
+    public double calcularDescuento(int cantidad) {
+        if(cantidad>=1 && cantidad<=5)
+            return porcentaje1;
+        else if(cantidad>=6 && cantidad<=10)
+            return porcentaje2;
+        else if(cantidad>=11 && cantidad<=15)
+            return porcentaje3;
+        else
+            return porcentaje4;
+    }
+
+    public String obtenerObsequio(int cantidadVendida) {
+        if(cantidadVendida == 1)
+            return obsequio1;
+        else if(cantidadVendida >=1 && cantidadVendida <= 5)
+            return obsequio2;
+        else
+            return obsequio3;
     }
 }
